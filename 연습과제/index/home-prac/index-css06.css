@@ -1,0 +1,28 @@
+h3:hover{
+    background-color: palevioletred;
+    color: palegoldenrod;
+}
+
+form > textarea:focus{
+    background-color: paleturquoise;
+}
+
+form > input[type="checkbox"]:checked+label[for="red"]{
+    background-color: cadetblue;
+    color: red;
+}
+
+form > input[type="checkbox"]:checked+label[for="blue"]{
+    background-color: cadetblue;
+    color: rgb(13, 10, 150);
+}
+
+form > input[type="checkbox"]:checked+label[for="yellow"]{
+    background-color: cadetblue;
+    color: rgb(203, 206, 37);
+}
+
+button:active{
+    color: aliceblue;
+    background-color: black;
+}
