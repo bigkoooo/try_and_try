@@ -1,0 +1,19 @@
+.dog {
+    /* 원래 위치를 파악하기 위한 배경색 */
+    background-color: rgb(8, 7, 7);
+    width: 100px;
+    height: 100px;
+    color: wheat;
+    position: absolute;
+    left: 300px;
+    top: 300px;
+    overflow: auto;
+    
+}
+
+
+.dog:hover {
+    transform: scale(3,3);
+
+    transition: 1s .5s;
+}

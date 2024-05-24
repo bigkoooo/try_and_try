@@ -1,0 +1,36 @@
+.container {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.item{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+
+.item1 {
+    background-color: aquamarine;
+    position: relative;
+    top: 30px;
+    left: 50px;
+}
+
+
+.item2 {
+    background-color: gold;
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+}
+
+
+.item3 {
+    background-color: coral;
+    position: fixed;
+    right: 100px;
+    top:100px;
+}

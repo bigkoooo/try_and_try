@@ -1,0 +1,35 @@
+.body{
+    background-color: grey;
+}
+
+.item1{
+    position: relative;
+    top: 60px;
+    left: 580px;
+    transform: rotate(45deg);
+}
+
+
+.item2{
+    position: relative;
+    top: 60px;
+    left: 480px;
+    transform: rotate(45deg);
+    
+}
+
+
+.item3{
+    position: relative;
+    top: 60px;
+    left: 380px;
+    transform: rotate(45deg);
+    
+}
+
+
+
+.pic{
+    width: 100px;
+    height: 100px;
+}
