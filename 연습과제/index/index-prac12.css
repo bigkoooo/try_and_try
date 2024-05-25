@@ -1,4 +1,4 @@
-.body{
+.grey{
     background-color: grey;
 }
 
@@ -6,16 +6,28 @@
     position: relative;
     top: 60px;
     left: 580px;
-    transform: rotate(45deg);
+    transform: skewY(30deg);
+    z-index: 1;
 }
 
+.item1:hover{
+    transform: skew(0deg);
+    transition: 1s;
+    z-index: 4;
+}
 
 .item2{
     position: relative;
     top: 60px;
     left: 480px;
-    transform: rotate(45deg);
-    
+    transform: skewY(30deg);
+    z-index: 2;
+}
+
+.item2:hover{
+    transform: skew(0deg);
+    transition: 1s;
+    z-index: 4;
 }
 
 
@@ -23,11 +35,15 @@
     position: relative;
     top: 60px;
     left: 380px;
-    transform: rotate(45deg);
-    
+    transform: skewY(30deg);
+    z-index: 3;
 }
 
-
+.item3:hover{
+    transform: skew(0deg);
+    transition: 1s;
+    z-index: 4;
+}
 
 .pic{
     width: 100px;

@@ -1,0 +1,30 @@
+.box{
+    background-color: skyblue;
+    transition: 1s;
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+}
+
+.box1:hover{
+    transform: scaleX(3);
+    transform-origin: left;
+}
+
+.box2:hover{
+    transform: skewX(-20deg);
+    transform-origin: bottom;
+}
+
+.box3:hover{
+    transform:translate(300px) rotate(3turn); 
+    border-radius: 50%;
+    background-color: orange;
+    
+}
+
+.box4:hover{
+    transform: scale(3) rotateY(360deg);
+    transform-origin: top; 
+    background-color: yellow;
+}
