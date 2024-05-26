@@ -1,0 +1,35 @@
+.principle{
+    width: 500px;
+    height: 400px;
+    position: relative;
+    background-color: brown;
+}
+
+.classA{
+    width: 400px;
+    background-color: cyan;
+}
+
+.Aban{
+    border: 3px double black;
+    background-color: bisque;
+}
+
+.classmate1{
+    width: 100px;
+    height: 100px;
+}
+
+.classmate2{
+    width: 150px;
+    height: 70px;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+}
+
+.classmate3{
+    width: 70px;
+    height: 150px;
+}
+
