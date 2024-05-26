@@ -1,0 +1,31 @@
+.container{
+    width: 500px;
+    height: 500px;
+    display: flex;
+}
+
+
+.parents1{
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content:stretch;
+    background-color: antiquewhite;
+    border: 2px solid brown;
+}
+
+div div{
+    width: 100px;
+    height: 100px;
+    border: 2px solid mediumslateblue; 
+}
+
+.parents2{
+    width: 500px;
+    height: 500px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(129, 199, 204);
+    border: 2px solid rgb(97, 150, 95);
+}
