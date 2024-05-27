@@ -1,0 +1,28 @@
+.fuckin {
+    
+    
+    position: relative;
+    
+
+
+    width: 100%;
+    
+    animation-name: demmm;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+
+
+}
+
+@keyframes demmm {
+    0%{
+        left: 100%;
+        width: 300%;
+    }
+    
+    100%{
+        left: 0%;
+        width: 100%;
+    }
+}
