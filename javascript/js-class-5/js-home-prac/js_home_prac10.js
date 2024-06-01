@@ -22,3 +22,5 @@ let square = function square(x) {
   };
   
   console.log(square(5));
+
+//   여기서도 다시 git push가 잘되는 걸까?
