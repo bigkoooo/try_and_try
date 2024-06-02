@@ -15,34 +15,34 @@ img{
     position: absolute;
 }
 
-.bora{
+.item1{
     top: 400px;
     left: 100px;
     z-index: 3;
 }
 
-.bora:hover{
+.item1:hover{
     transform: skew(0deg);
 }
 
-.ttubi{
+.item2{
     top: 250px;
     left: 200px;
     z-index: 2;
 }
 
-.ttubi:hover{
+.item2:hover{
     transform: skew(0deg);
     z-index: 3;
 }
 
-.nana{
+.item3{
     top: 100px;
     left: 300px;
     z-index: 1;
 }
 
-.nana:hover{
+.item3:hover{
     transform: skew(0deg);
     z-index: 3;
 }
