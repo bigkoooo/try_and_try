@@ -1,0 +1,29 @@
+
+
+@media (max-width: 700px) {
+    /* viewport width가 480px 이하 일 때 */
+    
+    .box{
+        width: 100px;
+        height: 100px;
+        background-color: black;
+        display: inline-block;
+        border: 2px solid springgreen;
+    }
+    
+}
+
+@media (min-width: 701px) {
+    /* viewport width가 480px 이하 일 때 */
+    
+    .box{
+        width: 100px;
+        height: 100px;
+        background-color: rgb(209, 10, 10);
+        display: block;
+        border: 2px solid rgb(3, 19, 11);
+        margin: 7px;
+    }
+    
+}
+
