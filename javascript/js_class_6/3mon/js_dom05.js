@@ -127,3 +127,4 @@ chgInput.addEventListener('input', function() {
     const div = document.querySelector('.intro');
     div.textContent = this.value;
 })
+
