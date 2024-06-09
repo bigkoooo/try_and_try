@@ -1,0 +1,35 @@
+ 
+.wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0px;
+    background-color: none;
+}
+
+.word{
+    font-family: "Ownglyph_JAEGEONSA-Rg";
+    transform: translate(-50%, -100%);
+    font-size: 16px;
+  }
+  
+  .letter{
+    display: inline-block;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 500ms ease-in;
+  }
+  
+  .letter.on{
+    transform: none;
+    opacity: 1;
+  }
+
+  @font-face {
+    font-family: 'Ownglyph_JAEGEONSA-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_JAEGEONSA-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
