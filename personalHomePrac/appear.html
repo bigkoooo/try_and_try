@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scrolling Text</title>
+    <style>
+        #hiddenText {
+            opacity: 0; /* 처음에는 숨겨진 상태로 시작 */
+            transition: opacity 0.8s ease; /* 부드럽게 페이드 인/아웃되도록 설정 */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+    <div>
+        1
+    </div>
+
+    <div id="hiddenText">
+        안보여야 함
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var element = document.getElementById('hiddenText');
+            var position = element.getBoundingClientRect();
+
+            // 텍스트가 화면에 나타나도록 위치가 0 이하인 경우에만 투명도를 조절하여 나타나도록 함
+            if (position.top <= window.innerHeight) {
+                element.style.opacity = '1';
+            } else {
+                element.style.opacity = '0';
+            }
+        });
+    </script>
+</body>
+</html>
