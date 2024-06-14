@@ -23,7 +23,7 @@ class Rectangle extends Shape{
         
     }
     getDiagonal() {
-        return Math.sqrt(this.height**2+this.width**2)
+        return Math.sqrt(this.height**2 + this.width**2)
       }
 
 }
