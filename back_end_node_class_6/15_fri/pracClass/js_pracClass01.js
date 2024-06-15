@@ -1,44 +1,41 @@
-function call(name, cb) {
+function call(name) {
     return new Promise(function (resolve, reject) {
         setTimeout(function() {
-            console.log(name);
-            
-            resolve(cd);
+            resolve(name);
         }, 1000);
     });
 }
 
-function back(cb) {
+function back(text) {
     return new Promise(function (resolve, reject) {
         setTimeout(function() {
-            console.log('back');
-            
-            resolve(back);
+            resolve(text);
         }, 1000)
     });
 }
 
-function hell(cb) {
+function hell(message) {
     return new Promise(function (resolve, reject) {
         setTimeout(function() {
-            
-            resolve(hell);
+            resolve(message);
         }, 1000);
     });
 }
 
 
-call('kim', kim)
-    .then(function (result) {  
-        console.log(result); 
+call('kim')
+    .then(function (resolve) {  
+        console.log(resolve); 
+        console.log(resolve + '반가워'); 
 
-        return mul(result); 
+        return back('back'); 
     })
-    .then(function (result) { 
-        console.log(result + '을 실행했구나'); 
+    .then(function (resolve) { 
+        console.log(resolve); 
+        console.log(resolve + '을 실행했구나'); 
 
-        return sub(result);
+        return hell('callback hell');
     })
-    .then(function (result) { 
-        console.log('여기는' + result); 
+    .then(function (resolve) { 
+        console.log('여기는' + resolve); 
     })
