@@ -3,7 +3,7 @@ const app = express(); // express 애플리케이션 객체 생성
 const PORT = 8888; // 서버가 실행될 포트 번호
 
 app.set('view engine', 'ejs'); // 뷰 엔진이 ejs임을 알려줌
-app.set('views', './views'); // 뷰들이 위치하게 될 폴더 위치를 알려줌
+app.set('views', './vviews'); // 뷰들이 위치하게 될 폴더 위치를 알려줌
 
 // 미들웨어(Middleware) 연결
 // : 요청(request)과 응답(response)의 중간에서 작업함
@@ -17,20 +17,20 @@ app.use(express.json()); // 요청의 body 객체에 json 형태(일단은 js ob
 // 라우팅 (Routing) => 주소를 설정한다 
 // localhost:PORT/ 경로로 접속했을 때, index.ejs를 응답하겠다.
 app.get('/', (req, res) => {
-    res.render('js_advence09', { title: '폼 실습을 해봅시다'});
+    res.render('js_pracClass05', { title: '폼 실습을 해봅시다'});
 })
 
 app.get('/getForm', (req, res) => {
     console.log(req.query); // { id: 'banana', pw: '1234' }
     // res.send('get 요청 성공!')
-    res.render('js_advence10', { title: 'GET 요청 결과', userInfo: req.query });
+    res.render('js_pracClass06', { title: 'GET 요청 결과', userInfo: req.query });
     // userInfo: req.query => userInfo: { id: 'banana', pw: '1234' }
 })
 
 app.post('/postForm', (req, res) => { 
     console.log(req.body); // { id: 'apple', pw: '1234' }
     // res.send('post 요청 성공!')
-    res.render('js_advence10', { title: 'POST 요청 결과', userInfo: req.body } )
+    res.render('js_pracClass06', { title: 'POST 요청 결과', userInfo: req.body } )
 })
 
 // res.send(): 문자열, JSON, 파일 등을 클라이언트에게 응답 (JSON을 가장 많이 응답)
