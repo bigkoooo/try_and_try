@@ -7,5 +7,13 @@
 </head>
 <body>
     <h1><%= title %></h1>
+
+    <h2>Single file upload</h2>
+    <!-- multer 이용 시, 반드시 enctype="multipart/form-data" 의 폼이어야 함!! -->
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="userfile"><br>
+        <input type="text" name="title">
+        <button type="submit">업로드</button>
+    </form>
 </body>
 </html>
