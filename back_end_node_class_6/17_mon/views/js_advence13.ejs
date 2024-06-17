@@ -17,7 +17,9 @@
     <div>비밀번호는 <span><%= userInfo.pw %></span>이군요!!</div>
 
     <!-- 퀴즈. 이메일, 학년 보여주기 -->
+    <% if (userInfo.email) { %>
     <div>이메일은 <span><%= userInfo.email %></span></div>
+    <% } %>
     <% if (userInfo.grade) { %>
     <div>학년은 <span><%= userInfo.grade %></span> 입니다.</div>
     <% } %>
