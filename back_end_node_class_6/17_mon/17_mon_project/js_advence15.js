@@ -3,12 +3,12 @@ const app = express();
 const PORT = 8080;
 
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('views', './vviews');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render('dynamic', { title: '동적 폼을 배워보자!' })
+    res.render('js_advence16-2', { title: '동적 폼을 배워보자!' })
 })
 
 // ajax
@@ -49,3 +49,4 @@ app.post('/fetch', (req, res) => {
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 })
+
