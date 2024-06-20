@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css"><!--CSS 파일 포함-->
 </head>
 <body>
     <h1><%= title %></h1>
 
     <h2>Single file upload</h2>
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="userfile"><br>
+        <input type="file" name="userfile" id="thumbnail"><br> <!-- input에 id 추가 -->
         <input type="text" name="title">
         <button type="submit">업로드</button>
     </form>
@@ -30,6 +31,16 @@
         <input type="text" name="title2">
         <button type="submit">업로드</button>
     </form>
+
+    <h2>동적 파일 업로드</h2>
+    <input type="file" name="thumbnail" id="thumbnail">
+    <button type="button" onclick="uploadThumbnail();">업로드</button>
+    <br>
+
+    <!-- 썸네일 업로드 내용을 바로 업로드 -->
+    <img src="" alt=""><br>
+
+    <script src="/static/js/thumbnail.js"></script>
 
 </body>
 </html>

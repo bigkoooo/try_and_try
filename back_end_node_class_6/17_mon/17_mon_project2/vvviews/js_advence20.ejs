@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- CSS 파일 포함 -->
 </head>
 <body>
     <h1>파일이 성공적으로 업로드 되었습니다.</h1>
@@ -11,7 +12,8 @@
     
     <div>
         img: 
-        <img src="/<%= src %>" alt="강아지" width="300">
+        <img src="/uploads/<%= src %>" alt="강아지" width="300"> <!-- 올바른 경로로 수정 -->
     </div>
+    <script src="/js/scripts.js"></script> <!-- 자바스크립트 파일 포함 -->
 </body>
 </html>
