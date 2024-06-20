@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/styles.css"><!--CSS 파일 포함-->
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- 경로 수정 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- axios CDN 추가 -->
 </head>
 <body>
     <h1><%= title %></h1>
 
     <h2>Single file upload</h2>
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="userfile" id="thumbnail"><br> <!-- input에 id 추가 -->
+        <input type="file" name="userfile" id="userfile"><br>
         <input type="text" name="title">
         <button type="submit">업로드</button>
     </form>
@@ -37,10 +38,8 @@
     <button type="button" onclick="uploadThumbnail();">업로드</button>
     <br>
 
-    <!-- 썸네일 업로드 내용을 바로 업로드 -->
     <img src="" alt=""><br>
 
-    <script src="/static/js/thumbnail.js"></script>
-
+    <script src="/static/js/thumbnail.js"></script> <!-- 경로 수정 -->
 </body>
 </html>
