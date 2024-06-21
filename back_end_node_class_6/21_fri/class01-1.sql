@@ -274,7 +274,6 @@ where
 - 집계함수를 쓸 수는 있으나 having 절 보다는 자유롭지 못함
 
 */
-
 -- join: 여러 테이블을 합쳐서 정보 조회
 select count(*) from customer; -- 15
 select count(*) from orders; -- 21
@@ -296,3 +295,22 @@ select custname, prodname, price from customer, orders
     
 select custname, prodname, price from customer inner join orders 
 	on customer.custid = orders.custid;
+    
+-- 고객 이름별로 //주문한 제품 총 구매액을 고객 별로 오름차순 정렬
+select custname, sum(price * amount) as 'total_price' 
+	from customer, orders
+    where customer.custid = orders.custid
+    group by custname
+    order by total_price asc;
+
+
+select custname, sum(price * amount) as 'total_price' 
+	from customer inner join orders
+    on customer.custid = orders.custid
+    group by custname
+    order by total_price asc;
+    
+-- natural join 
+select * from customer natural join orders;
+
+    
