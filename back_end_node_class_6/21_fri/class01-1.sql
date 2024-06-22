@@ -1,3 +1,5 @@
+
+
 -- DML (Data Definition Lanaguage)
 drop table orcustomerders;
 drop table customer;
