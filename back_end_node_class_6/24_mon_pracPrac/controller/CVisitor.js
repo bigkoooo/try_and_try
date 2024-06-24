@@ -7,6 +7,8 @@ exports.main = (req, res) => {
 
 // (2) GET /visitors => localhost:PORT/visitors
 exports.getVisitors = (req, res) => {
+  // console.log(Visitor.getVisitors); // [Function (anonymous)]
+
   // [before]
   // res.render('visitor', { data: Visitor.getVisitors() });
 
@@ -16,7 +18,21 @@ exports.getVisitors = (req, res) => {
     // : model/Visitor.js getVisitors함수의 callback(rows)의 "rows" 변수에 대응
   
     console.log('controller/CVisitor.js >> ', result);
-    
-    res.send('test');
+
+    res.render('visitor', { data: result });
   })
 };
+
+exports.postVisitor = (req, res) => {
+  console.log(req.body);
+
+  Visitor.postVisitor(req.body, (result) => {
+    // result: rows.insertId
+    console.log('controller/CVisitor.js >> ', result);
+    // controller/CVisitor.js >>  4
+
+    res.send({id: result, 
+      name: req.body.name, 
+      comment: req.body.comment})
+  });
+}

@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
     <title>Document</title>
 </head>
 <body>
@@ -12,11 +16,11 @@
           <input type="text" id="name" placeholder="사용자 이름" /> <br />
           <input type="text" id="comment" placeholder="방명록" /> <br />
           <div id="button-group">
-            <button type="button">등록</button>
+            <button type="button" onclick="createVisitor();">등록</button>
           </div>
         </fieldset>
-      </form>
-      <br />
+    </form>                   
+    <br />
     
     <table border="1" cellspacing="0">
         <thead>
@@ -43,9 +47,12 @@
             </td>
           </tr>
           <% } %>
+          
         </tbody>
-      </table>
+    </table>
 
-      <a href="/">HOME</a>
-    </body>
+    <a href="/">HOME</a>
+
+    <script src="/static/visitor.js"></script>
+</body>
 </html>
