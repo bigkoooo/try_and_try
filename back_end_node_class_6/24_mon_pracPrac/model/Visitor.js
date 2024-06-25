@@ -12,8 +12,8 @@ const mysql = require('mysql');
 
 const conn = mysql.createConnection({
   host: 'localhost',
-  user: 'user',
-  password: '1234',
+  user: 'user1',
+  password: '12345678',
   database: 'codingon'
 }); // database 연결 객체
 
