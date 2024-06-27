@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controller/Cvisitor');
+const controller = require('../controller/CVisitor');
 const router = express.Router();
 
 // 작업 순서
