@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "test1",
+    "username": "user1",
     "password": "12345678",
     "database": "codingon",
     "host": "127.0.0.1",
