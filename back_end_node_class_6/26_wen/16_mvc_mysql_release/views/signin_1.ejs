@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include('include/include', { title: '로그인' })%>
+  <body>
+    <h1>로그인</h1>
+
+    <!-- 로그인 폼 -->
+    <form name="form_login">
+      <label for="userid">ID</label>
+      <input id="userid" type="text" name="userid" required /><br />
+      <label for="password">Password</label>
+      <input id="password" type="password" name="pw" required /><br />
+      <button type="button" onclick="login();">Login</button>
+    </form>
+
+    <a href="/user/signup">Register</a>
+
+    <script>
+      // [Login] 버튼 클릭시 서버에 로그인 요청하기
+      function login() {
+        const form = document.forms['form_login']; // 로그인 폼을 가져옴
+
+        // 서버에 로그인 요청
+        axios({
+          method: 'POST',
+          url: '/user/signin',
+          data: {
+            userid: form.userid.value,
+            pw: form.password.value
+          }
+        }).then((res) => {
+          console.log(res);
+
+          // 로그인 성공 시 페이지 리다이렉트 (서버에서 처리)
+          window.location.href = '/user/profile';
+        }).catch((error) => {
+          console.error('Error:', error);
+          if (error.response && error.response.data) {
+            alert(error.response.data.message);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

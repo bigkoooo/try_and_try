@@ -35,14 +35,7 @@ exports.postsignIn = (req, res) => {
             return res.status(400).send({ message: error });
         }
 
-        res.send({ message: '로그인 성공' }); // 로그인 성공 여부만 반환
-    });
-};
-
-exports.postProfile = (req, res) => {
-    const userid = req.body.userid; // POST 요청으로 받은 userid
-    User.getUserById(userid, (result) => {
-        res.render('profile', { data: result }); // 프로필 페이지 렌더링
+        res.render('profile', { data: result }); // 로그인 성공 시 프로필 페이지 렌더링
     });
 };
 
