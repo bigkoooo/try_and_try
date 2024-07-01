@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
   config.password, 
   config
 ); // sequelize 객체
-
+6
 // 모델 불러오기
 const PlayerModel = require('./Player')(sequelize, Sequelize); 
 const TeamModel = require('./Team')(sequelize, Sequelize); 
