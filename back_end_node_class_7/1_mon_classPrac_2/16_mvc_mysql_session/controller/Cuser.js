@@ -30,21 +30,44 @@ exports.signIn = (req, res) => {
 };
 
 exports.postsignIn = (req, res) => {
-    User.postsignIn(req.body, (result, error)=> {
-        if(error){
+    User.postsignIn(req.body, (result, error) => {
+        if (error) {
             return res.status(400).send({ message: error });
         }
 
-        res.render('profile', { data: result });
+        req.session.loggedin = true;
+        req.session.userId = result.userid;
+        res.send({ message: '로그인 성공' });
     });
 };
 
 exports.postProfile = (req, res) => {
+    
     const userid = req.body.userid;
     User.getUserById(userid, (result) => {
-        res.render('profile', { data: result });
+      res.render('profile', { data: result });
     });
+  };
+
+//세션 만료되면 튕기게 하는 거
+  exports.checkSession = (req, res) => {
+    if (req.session.loggedin && req.session.userId) {
+        res.json({ loggedin: true });
+    } else {
+        res.json({ loggedin: false });
+    }
 };
+
+//로그아웃
+exports.logout = (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).send({ message: '로그아웃 중 오류가 발생했습니다.' });
+      }
+      res.clearCookie('connect.sid'); // 세션 쿠키 제거
+      res.send({ message: '로그아웃 되었습니다.' });
+    });
+  };
 
 // 회원 정보 수정
 exports.patchProfile = (req, res) => {

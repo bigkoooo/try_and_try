@@ -19,5 +19,9 @@ router.delete('/profile/delete', controller.deleteProfile);
 
 router.patch('/profile/edit', controller.patchProfile);
 
+router.get('/check-session', controller.checkSession);
+
+router.post('/logout', controller.logout);
+
 module.exports = router;
 
