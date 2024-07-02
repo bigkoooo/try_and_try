@@ -30,7 +30,7 @@ app.get('/setCookie', (req, res) => {
     // res.cookie(키, 값, 옵션)
     // : 쿠키를 설정하는 메서드 =/= 서버가 클라이언트 응답
     res.cookie('myKeyTest', 'myValueTest', cookieConfig);
-
+    
     // 클라이언트한테 응답!
     res.send('Set signed cookie!');
 })
@@ -48,6 +48,7 @@ app.get('/getCookie', (req, res) => {
     // req.signedCookies
     // : cookie-parser가 만든 요청의 서명된 쿠키 해석
     res.send(req.signedCookies);
+    console.log('Cookies:', req.cookies); // 여기서 쿠키를 확인할 수 있습니다.
 })
 
 app.listen(port, () => {
@@ -57,6 +58,8 @@ app.listen(port, () => {
 
 // cookie-parser
 // : 요청에 실려온 쿠키를 해석해서 req.cookies 객체로 만듦
+// : 하지만 cookieParser 미들웨어를 사용할 때 signed 옵션을 true로 설정하면, 
+// 쿠키는 서명되어 req.signedCookies 객체에 저장됩니다. 따라서 req.cookies 대신 req.signedCookies를 확인해야 한다고 한다.
 
 // cookieParser(secretKey, optionObj)
 // - secretKey: 비밀키
