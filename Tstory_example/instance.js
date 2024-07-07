@@ -1,4 +1,4 @@
-class Car {
+class Tesla {
     constructor(color, model) {
         this.color = color;
         this.model = model;
@@ -9,7 +9,7 @@ class Car {
     }
 }
 
-const myCar = new Car('red', 'Tesla Model 3');
+const myCar = new Tesla('red', 'Tesla Model 3');
 myCar.drive(); // Tesla Model 3 is driving.
 
 class CookieCutter {
