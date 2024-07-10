@@ -1,0 +1,31 @@
+.background{
+    background-color: black;
+}
+
+
+
+.carousel{
+    margin-top: 330px; /* 로그인 버튼의 높이만큼 여백을 추가 */
+}
+
+.carousel-inner {
+    height: 570px; /* 원하는 높이로 설정 */
+}
+
+.carousel-inner img {
+    object-fit: cover; /* 이미지가 컨테이너를 덮도록 조정 */
+    height: 100%; /* 부모 높이에 맞추기 */
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 20px; /* 하단에서 20px 위로 조정 */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0); /* 배경색과 투명도 */
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff; /* 텍스트 색상 */
+}
+
