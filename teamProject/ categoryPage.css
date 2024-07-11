@@ -2,10 +2,8 @@
     background-color: black;
 }
 
-
-
 .carousel{
-    margin-top: 330px; /* 로그인 버튼의 높이만큼 여백을 추가 */
+    margin-top: 270px; /* 로그인 버튼의 높이만큼 여백을 추가 */
 }
 
 .carousel-inner {
@@ -29,3 +27,6 @@
     color: #fff; /* 텍스트 색상 */
 }
 
+.navbar-custom {
+    background-color: #000 !important;
+  }
