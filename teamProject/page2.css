@@ -19,7 +19,6 @@ body {
   flex-direction: row; /* 기본 가로 나열 */
 }
 
-/* 600px 미만에서 세로 나열 */
 @media (max-width: 599px) {
   .centered {
     flex-direction: column;
@@ -27,7 +26,6 @@ body {
   }
 }
 
-/* Default gap */
 @media (min-width: 600px) {
   .centered {
     gap: 2rem;
@@ -56,6 +54,12 @@ body {
   .centered {
     gap: 15rem;
   }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card {
@@ -151,54 +155,61 @@ p {
 }
 
 /* 댓글 스타일 */
+.comments {
+  width: 100%; /* 카드와 동일한 폭을 가짐 */
+  margin-top: 1rem;
+}
+
 .comment {
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    margin-top: 1rem;
-    position: relative; /* 상대 위치 */
-  }
-  
-  .comment-header {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-header img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.comment-options {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.comment-body {
+  margin-bottom: 0.5rem;
+}
+
+.comment-footer {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
-  }
-  
-  .comment-header img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 0.5rem;
-  }
-  
-  .comment-author {
-    font-weight: bold;
-    margin-right: auto;
-  }
-  
-  .comment-options {
-    color: #888;
-    font-size: 0.875rem;
-  }
-  
-  .comment-body {
-    margin-bottom: 0.5rem;
-  }
-  
-  .comment-footer {
-    display: flex;
-    align-items: center;
     font-size: 0.875rem;
     color: #888;
+    flex-wrap: nowrap; /* 이 속성을 추가하여 요소가 한 줄에 나오도록 함 */
   }
   
-  .comment-footer span {
-    margin-right: 1rem;
-  }
-  
-  .comment-action {
-    color: #ff6666;
-    cursor: pointer;
-  }
+.comment-footer span {
+margin-right: 1rem;
+white-space: nowrap; /* 이 속성을 추가하여 텍스트가 줄바꿈되지 않도록 함 */
+}
+
+.comment-action {
+color: #ff6666;
+cursor: pointer;
+white-space: nowrap; /* 이 속성을 추가하여 텍스트가 줄바꿈되지 않도록 함 */
+}
