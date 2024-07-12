@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/popup.css">
+    <script defer src="/javascripts/popup.js"></script>
+    <title>Comment Popup</title>
+</head>
+<body>
+    <h2>댓글 내용</h2>
+    <div class="comment-form">
+        <input type="text" id="comment-input" placeholder="댓글을 입력하세요">
+        <span class="char-counter" id="char-counter">0</span>
+        <button id="add-comment">추가</button>
+    </div>
+    <div id="comments-container">
+        <% if (comments.length > 0) { %>
+            <% comments.forEach(function(comment) { %>
+                <div class="comment" data-id="<%= comment.comment_id %>">
+                    <div class="comment-header">
+                        <div class="comment-author">
+                            <strong><%= comment.User ? comment.User.nickname : 'Unknown User' %>:</strong>
+                        </div>
+                        <div class="comment-options">
+                            <% if (user && user.userId == comment.userid) { %>
+                                <button class="edit-comment">수정</button>
+                                <button class="delete-comment">삭제</button>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="comment-body">
+                        <p><%= comment.comment_contents %></p>
+                    </div>
+                    <div class="comment-footer">
+                        <span class="likes">0</span>
+                        <span class="comment-action">좋아요 <span class="thumb">👍</span></span>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>아직 입력된 댓글이 없습니다. 댓글을 입력해주세요.</p>
+        <% } %>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const commentInput = document.getElementById('comment-input');
+            const addCommentButton = document.getElementById('add-comment');
+            const commentsContainer = document.getElementById('comments-container');
+            const charCounter = document.getElementById('char-counter');
+            const user = <%- JSON.stringify(user) %>;
+
+            const updateCharCount = () => {
+                charCounter.textContent = commentInput.value.length;
+            };
+
+            commentInput.addEventListener('input', updateCharCount);
+
+            const createComment = (text, commentId = null) => {
+                const comment = document.createElement('div');
+                comment.className = 'comment';
+                if (commentId) {
+                    comment.setAttribute('data-id', commentId);
+                }
+
+                const commentHeader = document.createElement('div');
+                commentHeader.className = 'comment-header';
+
+                const commentAuthor = document.createElement('div');
+                commentAuthor.className = 'comment-author';
+                commentAuthor.textContent = '익명';
+
+                const commentOptions = document.createElement('div');
+                commentOptions.className = 'comment-options';
+
+                const editButton = document.createElement('button');
+                editButton.textContent = '수정';
+                editButton.addEventListener('click', () => {
+                    editComment(comment);
+                });
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '삭제';
+                deleteButton.addEventListener('click', () => {
+                    deleteComment(comment);
+                });
+
+                commentOptions.appendChild(editButton);
+                commentOptions.appendChild(deleteButton);
+
+                commentHeader.appendChild(commentAuthor);
+                commentHeader.appendChild(commentOptions);
+
+                const commentBody = document.createElement('div');
+                commentBody.className = 'comment-body';
+                commentBody.textContent = text;
+
+                const commentFooter = document.createElement('div');
+                commentFooter.className = 'comment-footer';
+
+                const likesSpan = document.createElement('span');
+                likesSpan.className = 'likes';
+                likesSpan.textContent = '0';
+
+                const likeButton = document.createElement('span');
+                likeButton.className = 'comment-action';
+                likeButton.innerHTML = '좋아요 <span class="thumb">👍</span>';
+                likeButton.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('thumb')) {
+                        likesSpan.textContent = '0';
+                    } else {
+                        let likes = parseInt(likesSpan.textContent);
+                        likes++;
+                        likesSpan.textContent = likes;
+                    }
+                });
+
+                commentFooter.appendChild(likesSpan);
+                commentFooter.appendChild(likeButton);
+
+                comment.appendChild(commentHeader);
+                comment.appendChild(commentBody);
+                comment.appendChild(commentFooter);
+
+                commentsContainer.appendChild(comment);
+            };
+
+            const editComment = (comment) => {
+                const commentBody = comment.querySelector('.comment-body');
+                const newText = prompt('댓글을 수정하세요:', commentBody.textContent);
+                if (newText) {
+                    const commentId = comment.getAttribute('data-id');
+                    fetch(`/comment/edit/${commentId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ comment_contents: newText })
+                    }).then(response => {
+                        if (response.ok) {
+                            commentBody.textContent = newText;
+                        } else {
+                            alert('Failed to edit comment.');
+                        }
+                    });
+                }
+            };
+
+            const deleteComment = (comment) => {
+                const commentId = comment.getAttribute('data-id');
+                fetch(`/comment/delete/${commentId}`, {
+                    method: 'DELETE'
+                }).then(response => {
+                    if (response.ok) {
+                        commentsContainer.removeChild(comment);
+                    } else {
+                        alert('Failed to delete comment.');
+                    }
+                });
+            };
+
+            addCommentButton.addEventListener('click', () => {
+                const text = commentInput.value.trim();
+                if (text) {
+                    createComment(text);
+                    commentInput.value = '';
+                    updateCharCount();
+                } else {
+                    alert('댓글을 입력하세요.');
+                }
+            });
+
+            updateCharCount();
+        });
+    </script>
+</body>
+</html>
