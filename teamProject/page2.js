@@ -12,6 +12,9 @@ const remap = (value, oldMax, newMax) => {
 
 window.addEventListener("DOMContentLoaded", (event) => {
     const cards = document.querySelectorAll(".card");
+
+    // addMousemoveListener 메서드
+    // 카드 위에서 마우스를 움직일 때 카드의 회전을 계산하여 적용
     cards.forEach((e) => {        
         e.addEventListener("mousemove", (event) => {
             const rect = e.getBoundingClientRect();
@@ -24,13 +27,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
             e.dataset.rotateX = x;
             e.dataset.rotateY = -y;
         });
-        
+
+        // addMouseoutListener 메서드
+        // 마우스가 카드에서 벗어날 때 카드의 회전을 초기화
         e.addEventListener("mouseout", (event) => {
             e.dataset.rotateX = 0;
             e.dataset.rotateY = 0;
         });
+
+        // 카드 클릭 이벤트 리스너 추가
+        // 카드를 클릭했을 때 data-url 속성에 지정된 URL로 이동
+        e.addEventListener("click", (event) => {
+            const url = e.getAttribute("data-url");
+            if (url) {
+                window.location.href = url;
+            }
+        });
     });
-    
+
+    // updateCardRotation 메서드
+    // 카드의 회전 애니메이션을 업데이트
     const update = () => {
         cards.forEach((e) => {
             let currentX = parseFloat(e.style.getPropertyValue('--rotateY').slice(0, -1));
@@ -46,6 +62,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     setInterval(update, 1000 / 60);
 
     // 좋아요 클릭 이벤트 추가
+    // 좋아요 버튼을 클릭했을 때 좋아요 수를 증가시킴
     const likeButtons = document.querySelectorAll('.comment-action');
     likeButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -58,6 +75,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 
     // 이모지 클릭 이벤트 추가
+    // 이모지 버튼을 클릭했을 때 댓글 숫자를 0으로 초기화
     const emojiButtons = document.querySelectorAll('.likes');
     emojiButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -65,4 +83,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
             commentsSpan.textContent = 0; // 댓글 숫자를 0으로 초기화
         });
     });
+
+    // addCommentClickListener 메서드
+    // 댓글 본문을 클릭했을 때 팝업창을 띄움
+    const addCommentClickListener = () => {
+        const comments = document.querySelectorAll('.comment-body');
+        comments.forEach(comment => {
+            comment.addEventListener('click', (event) => {
+                const popupWidth = window.innerWidth * 0.8;
+                const popupHeight = window.innerHeight * 0.8;
+                const popupLeft = (window.innerWidth - popupWidth) / 2;
+                const popupTop = (window.innerHeight - popupHeight) / 2;
+                window.open('popup.html', 'popup', `width=${popupWidth},height=${popupHeight},left=${popupLeft},top=${popupTop}`);
+            });
+        });
+    };
+
+    addCommentClickListener();  // 댓글 클릭 이벤트 리스너 추가 호출
 });
