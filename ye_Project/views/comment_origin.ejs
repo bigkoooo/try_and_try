@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+</head>
+<body>
+    <h1>Comments</h1>
+    <a href="/user">홈</a>
+    <div id="comments-section">
+        <!-- 입력된 댓글 만큼 div 생성 -->
+        <% if (comments.length > 0) { %>
+            <% comments.forEach(function(comment) { %>
+                <div class="comment" data-id="<%= comment.comment_id %>">
+                    <strong><%= comment.User ? comment.User.nickname : 'Unknown User' %>:</strong>
+                    <p>
+                        <%= comment.comment_contents %>
+                    </p>
+                    <!-- 여기서 토큰값과 유저 아이디값 비교해서 같으면 나타남  -->
+                    <% if (user && user.userId == comment.userid) { %>
+                        <button class="edit-comment">Edit</button>
+                        <button class="delete-comment">Delete</button>
+                    <% } %>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>아직 입력된 댓글이 없습니다. 댓글을 입력해주세요. </p>
+        <% } %>
+    </div>
+    
+    <div id="comment-form">
+        <h2>Add a Comment</h2>
+        <textarea id="comment-contents" required></textarea>
+        <button id="submit-comment">댓글등록</button>
+    </div>
+
+    <script>
+        // 모든 DOM 요소가 완전히 로드되고 파싱된 후에 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitCommentButton = document.getElementById('submit-comment');
+            const commentContents = document.getElementById('comment-contents');
+            const user = <%- JSON.stringify(user) %>;
+            // console.log('프론트 user >>', user); // Object { exp: 1720747978, iat: 1720744378, userId: 1 } >> 이건 토큰에 저장된 값인가...? 
+
+            submitCommentButton.addEventListener('click', function() {
+                if (!user) {
+                    alert('먼저 로그인을 해주세요');
+                    commentContents.value = '';
+                    return;
+                }
+
+                const commentText = commentContents.value;
+                if (!commentText) {
+                    alert('내용을 작성해주세요.');
+                    return;
+                }
+
+                fetch('/comment/add', {
+                    method: 'POST',
+                    // 요청 헤더 설정 : json 형식의 데이터 전송 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // 요청 본문 
+                    body: JSON.stringify({ comment_contents: commentText })
+                    // 서버 응답 이후! 
+                }).then(response => {
+                    if (response.ok) {
+                        // 새로고침 후 데이터 전송
+                        window.location.reload();
+                    } else {
+                        alert('Failed to post comment.');
+                    }
+                });
+            });
+
+            const editButtons = document.querySelectorAll('.edit-comment');
+            const deleteButtons = document.querySelectorAll('.delete-comment');
+
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const commentDiv = this.closest('.comment');
+                    const commentId = commentDiv.getAttribute('data-id');
+                    const commentText = prompt('수정할 내용을 입력하세요.:', commentDiv.querySelector('p').textContent);
+                    if (commentText) {
+                        fetch(`/comment/edit/${commentId}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ comment_contents: commentText })
+                        }).then(response => {
+                            if (response.ok) {
+                                window.location.reload();
+                            } else {
+                                alert('Failed to edit comment.');
+                            }
+                        });
+                    }
+                });
+            });
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const commentDiv = this.closest('.comment');
+                    const commentId = commentDiv.getAttribute('data-id');
+                    if (confirm('Are you sure you want to delete this comment?')) {
+                        fetch(`/comment/delete/${commentId}`, {
+                            method: 'DELETE'
+                        }).then(response => {
+                            if (response.ok) {
+                                window.location.reload();
+                            } else {
+                                alert('Failed to delete comment.');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
