@@ -238,3 +238,47 @@ p {
     cursor: pointer;
     margin-left: -3rem; /* 좋아요 위치를 한글자 폭 만큼 왼쪽으로 이동 */
   }
+
+  /* detail */
+
+  /* 상세보기 클릭시 카드 이동 */
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
+  }
+  
+  .card.slide-right {
+  animation: slideRight 0.5s forwards;
+  }
+  
+
+  /* 그라디언트 박스 */
+  .gradient-border {
+  
+    --borderWidth: 3px;
+    background: #1D1F20;
+    position: relative;
+    border-radius: var(--borderWidth);
+    width: 100%;  /* 가로 길이, #box와 동일하게 설정 */
+    height: 100%; /* 세로 길이, #box와 동일하게 설정 */
+  }
+  
+  
+  
+  .gradient-border:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+  }

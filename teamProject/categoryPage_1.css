@@ -1,0 +1,72 @@
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #000;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+  
+  .header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .search-button, .login-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #3d0402;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #f0f0f0;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease; /* 애니메이션 효과 추가 */
+  }
+  
+  .search-button:hover, .login-button:hover {
+    background-color: #3d0402; /* 마우스 올라갔을 때 배경색 변경 */
+  }
+  
+  .group {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .item {
+    width: 15vw;
+    height: 65vh;
+    background-position: center;
+    background-size: 75vh;
+    margin: 1vw;
+    border-radius: 3vw;
+    display: inline-block;
+    cursor: pointer;
+    position: relative; /* 텍스트 위치를 위해 추가 */
+  }
+  
+  .text {
+    color: white;
+    font-size: 1em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center; /* 중앙 정렬 */
+    position: absolute; /* 텍스트 위치를 위해 추가 */
+    bottom: 10px; /* 하단으로부터의 거리 */
+    left: 50%; /* 수평 중앙 정렬 */
+    transform: translateX(-50%); /* 수평 중앙 정렬 */
+  }
+  
