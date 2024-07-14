@@ -267,17 +267,48 @@
             }
         }
 
-        /* 미디어 쿼리 추가: 브라우저 창 너비가 800px에서 1200px 사이일 때 */
-        @media (min-width: 1050px) and (max-width: 1500px) {
-            body {
-                margin: 0; /* 좌우 여백을 없앰 */
-                padding: 0; /* 패딩도 없앰 */
+        /* 미디어 쿼리 추가: 브라우저 창 너비가 1200px 이하일 때 */
+        @media (max-width: 1200px) {
+            .container .card {
+                width: 313.6px; /* 320px의 98% */
+                height: 441px; /* 450px의 98% */
             }
-            #box {
-                margin-left: auto;
-                margin-right: auto;
+            .container .card .imgBx img {
+                width: 78.4%; /* 이미지 크기 2% 줄임 */
+            }
+            .gradient-border, #box {
+                font-size: 1.274rem; /* 1.3rem의 98% */
             }
         }
+
+        /* 미디어 쿼리 추가: 브라우저 창 너비가 1000px 이하일 때 */
+        @media (max-width: 1000px) {
+            .container .card {
+                width: 310.4px; /* 320px의 97% */
+                height: 436.5px; /* 450px의 97% */
+            }
+            .container .card .imgBx img {
+                width: 77.6%; /* 이미지 크기 3% 줄임 */
+            }
+            .gradient-border, #box {
+                font-size: 1.248rem; /* 1.3rem의 96% */
+            }
+        }
+
+        /* 미디어 쿼리 추가: 브라우저 창 너비가 800px 이하일 때 */
+        @media (max-width: 800px) {
+            .container .card {
+                width: 307.2px; /* 320px의 96% */
+                height: 432px; /* 450px의 96% */
+            }
+            .container .card .imgBx img {
+                width: 76.8%; /* 이미지 크기 4% 줄임 */
+            }
+            .gradient-border, #box {
+                font-size: 1.222rem; /* 1.3rem의 94% */
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -304,8 +335,8 @@
                 </div>
                 <!-- 좋아요 기능  -->
                 <div class="likes_container">
-                    <button id="likeButton">:심장_박동:</button>
-                    <span id="likesCount"><%= likesCount %> 좋아요</span>
+                    <button id="likeButton">👍</button>
+                    <span id="likesCount"> 좋아요 <%= likesCount %></span>
                 </div>
                 <!-- 혜택 정보 -->
                 <div class="benefits_container">
