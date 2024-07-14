@@ -83,7 +83,7 @@ body {
 
 .comments {
     width: 270px;
-    margin-top: 20px; /* 카드와 댓글 사이의 간격 */
+    margin-top: 50px; /* 카드와 댓글 사이의 간격을 조정 */
     background: #1a1a1a;
     border-radius: 10px;
     padding: 10px;
@@ -91,6 +91,12 @@ body {
 
 .comment {
     margin-bottom: 10px; /* 댓글 사이의 간격 */
+    height: 150px; /* 각 댓글의 고정 높이 */
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
+    position: relative; /* 자식 요소의 위치를 기준으로 조정할 수 있도록 relative 설정 */
+    display: flex; /* flexbox 사용 */
+    flex-direction: column; /* 요소를 세로로 정렬 */
+    justify-content: space-between; /* 요소들 사이의 간격을 균등하게 분배 */
 }
 
 .comment-header {
@@ -115,37 +121,36 @@ body {
 
 .comment-body {
     margin: 10px 0;
+    flex-grow: 1; /* 중간 부분이 남은 공간을 차지하도록 함 */
 }
 
 .comment-footer {
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* 요소들이 왼쪽 정렬되도록 설정 */
     font-size: 12px;
+    flex-wrap: nowrap; /* 요소가 한 줄에 나오도록 함 */
+    width: 100%; /* 부모 요소의 너비에 맞게 조정 */
+    padding: 5px 10px; /* 좌우 여백 확보 및 높이 축소 */
+    box-sizing: border-box; /* padding을 width에 포함 */
+    background-color: #1a1a1a; /* 기본 배경색 */
+    min-height: 30px; /* 최소 높이 설정 */
 }
 
 .comment-footer span {
-    margin-right: 10px;
+    display: flex;
+    align-items: center; /* 자식 요소를 수직 중앙 정렬 */
+    margin-left: 10px; /* 요소 사이의 간격을 설정 */
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 함 */
 }
 
-.dribbble {
-    position: fixed;
-    top: 25px;
-    right: 25px;
+.comment-footer .likes,
+.comment-footer .comments,
+.comment-footer .comment-action {
+    display: flex;
+    align-items: center; /* 자식 요소를 수직 중앙 정렬 */
+    margin: 0; /* 불필요한 마진 제거 */
 }
-
-.dribbble > a {
-    font-size: 12px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #ec4989;
-}
-
-img {
-    margin: auto;
-    display: block;
-    border-radius: 15px;
-}
-
 /* 반응형 디자인을 위한 미디어 쿼리 */
 @media (max-width: 1200px) {
     #container {
@@ -178,5 +183,6 @@ img {
 
     .comments {
         width: 200px; /* 작은 화면에서 댓글 박스 크기 조정 */
+        margin-top: 20px; /* 작은 화면에서 카드와 댓글 사이의 간격 */
     }
 }
