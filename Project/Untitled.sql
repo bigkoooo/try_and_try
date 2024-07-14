@@ -18,6 +18,37 @@ DROP TABLE CardLike;
 -- INSERT INTO user (userid, name, pw) VALUES ('hello', 'hello', '1234');
 -- 데이터베이스 선택 및 테이블 정의
 USE your_database_name;
+-- 카드 테이블 생성 --by GPT
+CREATE TABLE Card (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    card_corp VARCHAR(50),
+    card_name VARCHAR(100),
+    card_image VARCHAR(255),
+    card_traffic VARCHAR(255),
+    traffic_details TEXT,
+    traffic_ox BOOLEAN,
+    traffic_ranking INT,
+    card_store VARCHAR(255),
+    store_details TEXT,
+    store_ox BOOLEAN,
+    store_ranking INT,
+    card_cafe VARCHAR(255),
+    cafe_details TEXT,
+    cafe_ox BOOLEAN,
+    cafe_ranking INT,
+    card_sub VARCHAR(255),
+    sub_details TEXT,
+    sub_ox BOOLEAN,
+    sub_ranking INT,
+    card_book VARCHAR(255),
+    book_details TEXT,
+    book_ox BOOLEAN,
+    book_ranking INT,
+    performance VARCHAR(255),
+    performance_details TEXT,
+    performance_ox BOOLEAN
+);
+
 -- 데이터 삽입
 INSERT INTO Card (card_corp, card_name, card_image, card_traffic, traffic_details, traffic_ox, traffic_ranking, card_store, store_details, store_ox, store_ranking, card_cafe, cafe_details, cafe_ox, cafe_ranking, card_sub, sub_details, sub_ox, sub_ranking, card_book, book_details, book_ox, book_ranking, performance, performance_details, performance_ox) VALUES
 -- 교통 혜택 top 3
