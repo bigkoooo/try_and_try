@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./detail.css">
+    <script defer src="./detail.js"></script>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+        @font-face {
+            font-family: 'MaruBuri';
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
+        }
+        @font-face {
+            font-family: 'MaruBuriSemiBold';
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot);
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot?#iefix) format("embedded-opentype"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2) format("woff2"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff) format("woff"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.ttf) format("truetype");
+        }
+        @font-face {
+            font-family: 'MaruBuriBold';
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot);
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot?#iefix) format("embedded-opentype"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2) format("woff2"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff) format("woff"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.ttf) format("truetype");
+        }
+        @font-face {
+            font-family: 'MaruBuriLight';
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot);
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot?#iefix) format("embedded-opentype"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format("woff2"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff) format("woff"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.ttf) format("truetype");
+        }
+        @font-face {
+            font-family: 'MaruBuriExtraLight';
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot);
+            src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot?#iefix) format("embedded-opentype"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2) format("woff2"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff) format("woff"), 
+            url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.ttf) format("truetype");
+        }
+        * {
+            font-family: 'MaruBuriSemiBold','Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000000;
+            margin: 0; /* 브라우저 기본 여백 제거 */
+        }
+        .container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column; /* 세로 정렬을 기본으로 설정 */
+        }
+        .container .card {
+            position: relative;
+            width: 320px; /* 고정된 가로 길이 */
+            height: 450px; /* 고정된 세로 길이 */
+            background: #232323;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 10px; /* 카드 간 간격 추가 */
+        }
+        .container .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #9bdc28;
+            clip-path: circle(350px at 80% 20%);
+            transition: 0.5s ease-in-out;
+        }
+        .container .card:hover:before {
+            clip-path: circle(300px at 80% -20%);
+        }
+        .container .card:after {
+            content: 'ATM';
+            position: absolute;
+            top: 30%;
+            left: -20%;
+            font-size: 12em;
+            font-weight: 800;
+            font-style: italic;
+            color: rgba(255, 255, 25, 0.05);
+        }
+        .container .card .imgBx {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10000;
+            width: 100%;
+            height: 220px;
+            transition: 0.5s;
+        }
+        .container .card:hover .imgBx {
+            top: 0%;
+            transform: translateY(0%);
+        }
+        .container .card .imgBx img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-9deg);
+            width: 80%; /* 반응형으로 설정 */
+        }
+        .container .card .contentBx {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            transition: 1s;
+            z-index: 10;
+        }
+        .container .card .contentBx #viewDetail {
+            font-family: 'MaruBuriSemiBold'; /* 원하는 폰트 패밀리로 변경 */
+        }
+        .container .card:hover .contentBx {
+            height: 210px;
+        }
+        .container .card .contentBx h2 {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+            margin: 0;
+        }
+        .container .card .contentBx a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #fff;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #111;
+            opacity: 0;
+            transform: translateY(140px);
+            transition: 0.5s;
+            margin-top: 0;
+        }
+        .container .card:hover .contentBx a {
+            opacity: 1;
+            transform: translateY(100px);
+            transition-delay: 0.35s;
+        }
+        /* 상세보기 클릭시 카드 이동 */
+        @keyframes slideLeft {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(calc(-20vw + 120px));
+            }
+        }
+        .card.slide-left {
+            animation: slideLeft 0.5s forwards;
+        }
+        /* 새로운 div 요소 슬라이드 애니메이션 */
+        @keyframes slideRight {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-20%);
+                opacity: 1;
+            }
+        }
+        #box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 500px; /* 고정된 가로 길이 */
+            height: 438px; /* 고정된 세로 길이 */
+            color: white;
+            font-family: 'MaruBuriSemiBold';
+            font-size: 1.3rem;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            left: calc(50% + 4vw);
+        }
+        .gradient-border {
+            --borderWidth: 10px;
+            position: relative;
+            border-radius: var(--borderWidth);
+        }
+        .gradient-border:after {
+            content: '';
+            position: absolute;
+            top: calc(-1 * var(--borderWidth));
+            left: calc(-1 * var(--borderWidth));
+            height: calc(100% + var(--borderWidth) * 2);
+            width: calc(100% + var(--borderWidth) * 2);
+            background: linear-gradient(60deg, #000000, #000000, #140000, #000000, #000000, #140000, #000000, #000000);
+            border-radius: calc(2 * var(--borderWidth));
+            z-index: -1;
+            animation: animatedgradient 5s ease alternate infinite;
+            background-size: 300% 300%;
+        }
+        .container .card .contentBx #backButton {
+            font-family: 'MaruBuriSemiBold', sans-serif; /* 원하는 폰트 패밀리로 변경 */
+            display: inline-block;
+            padding: 10px 20px;
+            background: #fff;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #111;
+            opacity: 0;
+            transform: translateY(140px);
+            transition: 0.4s;
+            margin-top: 0;
+        }
+        .container .card:hover .contentBx #backButton {
+            opacity: 1;
+            transform: translateY(100px);
+            transition-delay: 0.25s;
+        }
+        @keyframes animatedgradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* 미디어 쿼리 추가: 브라우저 창 너비가 800px에서 1200px 사이일 때 */
+        @media (min-width: 1050px) and (max-width: 1500px) {
+            body {
+                margin: 0; /* 좌우 여백을 없앰 */
+                padding: 0; /* 패딩도 없앰 */
+            }
+            #box {
+                width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        /* 미디어 쿼리 추가: 브라우저 창 너비가 800px 이하일 때 */
+        @media (max-width: 1050px) {
+            body {
+                flex-direction: column;
+            }
+            .container {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            #box {
+                left: 15%;
+                transform: translateX(-50%);
+                top: 100%; /* 컨테이너 아래로 이동 */
+                margin-top: 20px;
+                position: relative;
+                width: 90vw !important;
+                max-width: 500px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="imgBx">
+                <img src="https://d1c5n4ri2guedi.cloudfront.net/card/2422/card_img/27141/2422card.png">
+            </div>
+            <div class="contentBx">
+                <h2>Card</h2>
+                <a href="" id="viewDetail">상세보기</a>
+                <a href="/index" id="backButton" style="display: none;">뒤로가기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 새로운 div 요소, 처음에는 숨김 -->
+    <div class="gradient-border" id="box" style="display: none;">
+        <div class="content-container">
+            <h1>카드별 상세 내용</h1>
+            <!-- 카드 정보 -->
+            <div class="card_info">
+                <img src="<%= card.card_image ? card.card_image : 'default-image-path' %>" alt="<%= card.card_name %>">
+                <div> 카드이름 :  <%= card.card_name %></div>
+                <div> 카드회사 : <%= card.card_corp %></div>
+            </div>
+            <!-- 좋아요 기능  -->
+            <div class="likes_container">
+                <button id="likeButton">:심장_박동:</button>
+                <span id="likesCount"><%= likesCount %> 좋아요</span>
+            </div>
+            <!-- 혜택 정보 -->
+            <div class="benefits_container">
+                <% if (card.traffic_ox) { %>
+                <div class="benefit">
+                    <h3> 교통 혜택 </h3>
+                    <p><%= card.traffic_details %></p>
+                </div>
+                <% } %>
+                <% if (card.store_ox) { %>
+                <div class="benefit">
+                    <h3>편의점 혜택 </h3>
+                    <p><%= card.store_details %></p>
+                </div>
+                <% } %>
+                <% if (card.cafe_ox) { %>
+                <div class="benefit">
+                    <h3>카페 혜택 </h3>
+                    <p><%= card.cafe_details %></p>
+                </div>
+                <% } %>
+                <% if (card.sub_ox) { %>
+                <div class="benefit">
+                    <h3>구독 혜택</h3>
+                    <p><%= card.sub_details %></p>
+                </div>
+                <% } %>
+                <% if (card.book_ox) { %>
+                <div class="benefit">
+                    <h3>서점 혜택</h3>
+                    <p><%= card.book_details %></p>
+                </div>
+                <% } %>
+                <% if (card.performance_ox) { %>
+                <div class="benefit">
+                    <h3>필요 실적 </h3>
+                    <p><%= card.performance_details %></p>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewDetailLink = document.getElementById('viewDetail');
+            const backButton = document.getElementById('backButton');
+            const card = document.querySelector('.card');
+            const box = document.getElementById('box');
+
+            // 상세보기 클릭 이벤트
+            viewDetailLink.addEventListener('click', (e) => {
+                e.preventDefault(); // 기본 링크 동작 방지
+                card.classList.add('slide-left'); // 카드에 slide-left 클래스 추가
+                viewDetailLink.style.display = 'none'; // 상세보기 버튼 숨김
+                backButton.style.display = 'inline-block'; // 뒤로가기 버튼 표시
+
+                // 카드가 왼쪽으로 이동하는 거리 계산 (35vw - 120px)
+                const cardMoveDistance = window.innerWidth * 0.35 - 120;
+
+                // 새로운 div 요소에 애니메이션을 바로 적용하여 더 빨리 나타나게 함
+                box.style.display = 'flex'; 
+                box.style.animation = 'slideRight 0.5s forwards'; // 애니메이션 시간을 줄여서 더 빨리 나타나도록 함
+            });
+
+            // 좋아요를 누를 때! 좋아요 수 갱신 or 로그인 유도
+            document.getElementById('likeButton').addEventListener('click', () => {
+                fetch('/detail/like', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // 요청 본문(req.body)에 JSON 형식으로 카드 ID 포함하기 ->
+                    body: JSON.stringify({ cardId: '<%= card.card_id %>' })
+                })
+                .then(response => {
+                    // 응답코드가 401일 때! -> 서버에서 보낸 코드(토큰 존재 유무 확인해서 토큰이 없을 때 401 보냄)
+                    if (response.status === 401) {
+                        if (confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+                            window.location.href = '/user/login';
+                            // 여기서 로그인 성공 시 다시 좋아요 화면으로 가기!! (로그인 컨트롤러랑 로그인ejs 수정 필요 )
+                            // window.location.href = `/user/login?redirect=${encodeURIComponent(currentUrl)}`
+                        }
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 서버(controller/Cdetail.addLike)에서 온 응답 데이터에 likesCount 속성이 있을 때!
+                    if (data.likesCount !== undefined) {
+                        document.getElementById('likesCount').innerText = `${data.likesCount} 좋아요`;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+</html>
