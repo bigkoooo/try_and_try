@@ -25,6 +25,8 @@ router.delete('/profile/delete', controller.deleteProfile);
 
 router.patch('/profile/edit', controller.patchProfile);
 
+// 로그인 로그아웃 버튼변경용
 
+router.get('/checkLoginStatus', controller.checkLoginStatus);
 
 module.exports = router;

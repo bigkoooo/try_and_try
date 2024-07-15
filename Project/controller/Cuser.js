@@ -85,8 +85,7 @@ exports.postlogIn = async (req, res) => {
 exports.logout = (req, res) => {
     try {
         res.clearCookie('token', { path: '/' });
-        // 쿠키 클리어에서 패스에 관해서 한번 생각하고 이거 수정추후 필요할수도 있음
-        res.send({ message: '로그아웃 되었습니다.' });
+        res.send({ message: '로그아웃 성공' });
     } catch (error) {
         console.error('Error in logout:', error);
         res.status(500).send({ message: '로그아웃 중 오류가 발생했습니다.' });
@@ -146,3 +145,13 @@ exports.deleteProfile = async (req, res) => {
     }
 };
 
+// 로그인 로그아웃 버튼 변경 
+// controller/Cuser.js
+
+exports.checkLoginStatus = (req, res) => {
+    if (req.cookies.token) {
+        res.json({ isLoggedIn: true });
+    } else {
+        res.json({ isLoggedIn: false });
+    }
+};
