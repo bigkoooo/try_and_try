@@ -82,6 +82,7 @@ exports.postlogIn = async (req, res) => {
 };
 //
 
+// Cuser.js
 exports.logout = (req, res) => {
     try {
         res.clearCookie('token', { path: '/' });
@@ -89,6 +90,14 @@ exports.logout = (req, res) => {
     } catch (error) {
         console.error('Error in logout:', error);
         res.status(500).send({ message: '로그아웃 중 오류가 발생했습니다.' });
+    }
+};
+
+exports.checkLoginStatus = (req, res) => {
+    if (req.cookies.token) {
+        res.json({ isLoggedIn: true });
+    } else {
+        res.json({ isLoggedIn: false });
     }
 }; // 로그아웃은 백 : res에 로그아웃 메세지 보내기 / 프론트 : localstorage안에 있는 토큰 비우기로 역할 확실히 분담
    // localhistory일땐 프론트에서 비우면 그만이지만, 쿠키는 서버에서 비우게 할 수 있음.... 따라서 clearCookie사용 (차이점)
