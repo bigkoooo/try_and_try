@@ -59,7 +59,6 @@ app.get('/', (req, res) => {
 //   res.render('search')
 // })
 
-
 // 404 에러 처리
 app.get('*', (req, res) => {
   res.render('404');

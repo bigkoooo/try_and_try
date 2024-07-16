@@ -102,21 +102,21 @@ exports.checkLoginStatus = (req, res) => {
 }; // 로그아웃은 백 : res에 로그아웃 메세지 보내기 / 프론트 : localstorage안에 있는 토큰 비우기로 역할 확실히 분담
    // localhistory일땐 프론트에서 비우면 그만이지만, 쿠키는 서버에서 비우게 할 수 있음.... 따라서 clearCookie사용 (차이점)
 
-// exports.checkToken = (req, res) => {
-//     const token = req.headers['authorization'];
-//     if (!token) {
-//         return res.status(403).send({ message: 'No token provided' });
-//     }
+exports.checkToken = (req, res) => {
+    const token = req.headers['authorization'];
+    if (!token) {
+        return res.status(403).send({ message: 'No token provided' });
+    }
 
-//     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-//         if (err) {
-//             console.error('Token verification failed:', err);
-//             return res.status(500).send({ message: 'Failed to authenticate token' });
-//         }
-//         req.userId = decoded.userId;
-//         res.json({ loggedin: true });
-//     });
-// };
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            console.error('Token verification failed:', err);
+            return res.status(500).send({ message: 'Failed to authenticate token' });
+        }
+        req.userId = decoded.userId;
+        res.json({ loggedin: true });
+    });
+};
 
 // profile전에 있는 로직 전체 확인 완료 
 
