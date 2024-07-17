@@ -206,12 +206,13 @@
             });
         });
 
-        
-
         // 검색 버튼 클릭 이벤트
         document.querySelector('.search-button').addEventListener('click', () => {
-            window.location.href = '/search';
-        });
+        const query = document.querySelector('.search-input').value;
+        if (query) {
+            window.location.href = `/search?query=${encodeURIComponent(query)}`;
+        }
+    });
     </script>
 </body>
 </html>
