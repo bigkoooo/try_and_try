@@ -9,7 +9,6 @@ const getCardDetails = async (cardId) => {
     return { card, likesCount };
 };
 
-
 // 카드 상세 정보 및 좋아요 수  -> detail.ejs 전달(초기 페이지 로딩 시)
 const showCardDetails = async (req, res) => {
     // url 경로매개변수(라우트에서 설정됨!)에서 카드ID가져오기 
@@ -37,7 +36,6 @@ const showCardDetails = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
-
 
 //좋아요 버튼을 눌렀을 때!! > 좋아요 추가 및 취소 / 좋아요 수 갱신 
 const toggleLike = async (req, res) => {
@@ -77,7 +75,6 @@ const toggleLike = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
-
 
 module.exports = {
     showCardDetails,

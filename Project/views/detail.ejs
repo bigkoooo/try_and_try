@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Card Detail</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
@@ -276,10 +276,10 @@
     <div class="container">
         <div class="card">
             <div class="imgBx">
-                <img src="https://d1c5n4ri2guedi.cloudfront.net/card/2422/card_img/27141/2422card.png">
+                <img src="<%= card.card_image ? card.card_image : 'default-image-path' %>" alt="<%= card.card_name %>">
             </div>
             <div class="contentBx">
-                <h2>Card</h2>
+                <h2><%= card.card_name %></h2>
                 <a href="" id="viewDetail">상세보기</a>
                 <a href="/index" id="backButton" style="display: none;">뒤로가기</a>
             </div>
@@ -290,7 +290,6 @@
                 <h1>카드별 상세 내용</h1>
                 <!-- 카드 정보 -->
                 <div class="card_info">
-                    <!-- <img src="<%= card.card_image ? card.card_image : 'default-image-path' %>" alt="<%= card.card_name %>"> -->
                     <div> 카드이름 :  <%= card.card_name %></div>
                     <div> 카드회사 : <%= card.card_corp %></div>
                 </div>

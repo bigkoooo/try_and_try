@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 이거 보이면 제대로 뒤로 온거임 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Stack</title>
@@ -28,8 +29,7 @@
             display: block;
             margin: auto;
             position: relative;
-            height: 100vh; /* 브라우저 높이에 맞추기 */
-            overflow-y: auto; /* 세로 스크롤 가능 */
+            /* height: calc(var(--cardH) * 36 - 1.5em); */
         }
         .cards, .stack {
             transform-style: preserve-3d;
@@ -37,7 +37,8 @@
         .cards {
             --scroll: 0;
             display: grid;
-            grid-template: repeat(36, var(--cardH)) / var(--cardW);
+            grid-template-rows: repeat(auto-fill, var(--cardH));
+            grid-template-columns: var(--cardW);
             grid-gap: 1.5em;
             position: fixed;
             top: 30%;
@@ -145,34 +146,34 @@
         }
         @media screen and (min-width: 361px) {
             main {
-                height: calc(var(--cardH) * 18 - 1.5em);
+                /* height: calc(var(--cardH) * 18 - 1.5em); */
             }
             .cards {
-                grid-template: repeat(18, var(--cardH)) / repeat(2, var(--cardW));
+                grid-template-columns: repeat(2, var(--cardW));
             }
         }
         @media screen and (min-width: 641px) {
             main {
-                height: calc(var(--cardH) * 12 - 1.5em);
+                /* height: calc(var(--cardH) * 12 - 1.5em); */
             }
             .cards {
-                grid-template: repeat(12, var(--cardH)) / repeat(3, var(--cardW));
+                grid-template-columns: repeat(3, var(--cardW));
             }
         }
         @media screen and (min-width: 961px) {
             main {
-                height: calc(var(--cardH) * 9 - 1.5em);
+                /* height: calc(var(--cardH) * 9 - 1.5em); */
             }
             .cards {
-                grid-template: repeat(9, var(--cardH)) / repeat(4, var(--cardW));
+                grid-template-columns: repeat(4, var(--cardW));
             }
         }
         @media screen and (min-width: 1281px) {
             main {
-                height: calc(var(--cardH) * 8 - 1.5em);
+                /* height: calc(var(--cardH) * 8 - 1.5em); */
             }
             .cards {
-                grid-template: repeat(8, var(--cardH)) / repeat(5, var(--cardW));
+                grid-template-columns: repeat(5, var(--cardW));
             }
         }
         @media screen and (prefers-color-scheme: dark) {
@@ -191,7 +192,7 @@
                     <div class="card bottom"></div>
                     <div class="card mid-bottom"></div>
                     <div class="card mid-top"></div>
-                    <div class="card top">
+                    <div class="card top" data-id="<%= card.card_id %>">
                         <div class="contents">
                             <h2><%= card.card_name %></h2>
                             <span><%= card.content %></span>
@@ -206,40 +207,69 @@
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            function updateCardSize() {
-                const cardCount = document.querySelectorAll('.stack').length;
-                const root = document.documentElement;
-                if (cardCount > 70) {
-                    root.style.setProperty('--cardW', '9em');
-                    root.style.setProperty('--cardH', '5em');
-                } else if (cardCount > 30) {
-                    root.style.setProperty('--cardW', '10em');
-                    root.style.setProperty('--cardH', '6em');
-                } else {
-                    root.style.setProperty('--cardW', '14em');
-                    root.style.setProperty('--cardH', '8em');
-                }
-            }
+        function updateCardSize() {
+          const cardCount = document.querySelectorAll('.stack').length;
+          const root = document.documentElement;
+          if (cardCount > 70) {
+              root.style.setProperty('--cardW', '9em');
+              root.style.setProperty('--cardH', '5em');
+          } else if (cardCount > 30) {
+              root.style.setProperty('--cardW', '10em');
+              root.style.setProperty('--cardH', '6em');
+          } else {
+              root.style.setProperty('--cardW', '14em');
+              root.style.setProperty('--cardH', '8em');
+          }
 
-            function scrollGrid() {
-                const mainElement = document.querySelector("main");
-                const cardsElement = document.querySelector(".cards");
-                if (mainElement && cardsElement) {
-                    let bodyHeight = document.body.offsetHeight,
-                        mainHeight = mainElement.offsetHeight,
-                        transY = (window.pageYOffset / (mainHeight - bodyHeight)) * -100;
-                    cardsElement.style.setProperty("--scroll", transY + "%");
-                }
-            }
+          const mainElement = document.querySelector('main');
+          const cardsElement = document.querySelector('.cards');
+          let cardsPerRow;
+          
+          // Adjust cardsPerRow based on the screen width
+          if (window.innerWidth >= 1281) {
+              cardsPerRow = 5;
+          } else if (window.innerWidth >= 961) {
+              cardsPerRow = 4;
+          } else if (window.innerWidth >= 641) {
+              cardsPerRow = 3;
+          } else if (window.innerWidth >= 361) {
+              cardsPerRow = 2;
+          } else {
+              cardsPerRow = 1;
+          }
+          
+          const rows = Math.ceil(cardCount / cardsPerRow);
+          mainElement.style.height = `calc(var(--cardH) * ${rows} + ${rows - 1} * 1.5em)`;
+          cardsElement.style.height = `calc(var(--cardH) * ${rows} + ${rows - 1} * 1.5em)`;
+        }
 
-            window.addEventListener("resize", () => {
-                scrollGrid();
-                updateCardSize();
-            });
-            window.addEventListener("scroll", scrollGrid);
-            updateCardSize();
-            scrollGrid();
-        });
+        function scrollGrid() {
+          const mainElement = document.querySelector("main");
+          const cardsElement = document.querySelector(".cards");
+          if (mainElement && cardsElement) {
+              let bodyHeight = document.body.offsetHeight,
+                  mainHeight = mainElement.offsetHeight,
+                  transY = (window.pageYOffset / (mainHeight - bodyHeight)) * -100;
+              cardsElement.style.setProperty("--scroll", transY + "%");
+          }
+        }
+
+          window.addEventListener("resize", () => {
+              updateCardSize();
+              scrollGrid();
+          });
+          window.addEventListener("scroll", scrollGrid);
+          updateCardSize();
+          scrollGrid();
+
+          // Add click event listener to each card
+          document.querySelectorAll('.card.top').forEach(card => {
+              card.addEventListener('click', () => {
+                  const cardId = card.getAttribute('data-id');
+                  window.location.href = `/detail/${cardId}`;
+              });
+          });
+      });
 
     </script>
 </body>
