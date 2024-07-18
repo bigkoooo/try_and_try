@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>카드별 상세 내용</h1>
+    <!-- 카드 정보 -->
+    <div class="card_info">
+        <img src="<%= card.card_image ? card.card_image : 'default-image-path' %>" alt="<%= card.card_name %>">
+        <div> 카드이름 :  <%= card.card_name %></div>
+        <div> 카드회사 : <%= card.card_corp %></div>
+    </div>
+    <!-- 좋아요 기능  -->
+    <div class="likes_container">
+      <button id="likeButton">:심장_박동:</button>
+      <span id="likesCount"><%= likesCount %> 좋아요</span>
+    </div>
+    <!-- 혜택 정보 -->
+    <div class="benefits_container">
+        <% if (card.traffic_ox) { %>
+          <div class="benefit">
+            <h3> 교통 혜택 </h3>
+            <p><%= card.traffic_details %></p>
+          </div>
+        <% } %>
+        <% if (card.store_ox) { %>
+          <div class="benefit">
+            <h3>편의점 혜택 </h3>
+            <p><%= card.store_details %></p>
+          </div>
+        <% } %>
+        <% if (card.cafe_ox) { %>
+          <div class="benefit">
+            <h3>카페 혜택 </h3>
+            <p><%= card.cafe_details %></p>
+          </div>
+        <% } %>
+        <% if (card.sub_ox) { %>
+          <div class="benefit">
+            <h3>구독 혜택</h3>
+            <p><%= card.sub_details %></p>
+          </div>
+        <% } %>
+        <% if (card.book_ox) { %>
+          <div class="benefit">
+            <h3>서점 혜택</h3>
+            <p><%= card.book_details %></p>
+          </div>
+        <% } %>
+        <% if (card.performance_ox) { %>
+          <div class="benefit">
+            <h3>필요 실적 </h3>
+            <p><%= card.performance_details %></p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+</body>
+<script>
+  // 좋아요를 누를 때! 좋아요 수 갱신 or 로그인 유도
+  document.getElementById('likeButton').addEventListener('click', () => {
+      fetch('/detail/like', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          // 요청 본문(req.body)에 JSON 형식으로 카드 ID 포함하기 ->
+          body: JSON.stringify({ cardId: '<%= card.card_id %>' })
+      })
+      .then(response => {
+        // 응답코드가 401일 때! -> 서버에서 보낸 코드(토큰 존재 유무 확인해서 토큰이 없을 때 401 보냄)
+          if (response.status === 401) {
+              if (confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+                  window.location.href = '/user/login';
+                  // 여기서 로그인 성공 시 다시 좋아요 화면으로 가기!! (로그인 컨트롤러랑 로그인ejs 수정 필요 )
+                  // window.location.href = `/user/login?redirect=${encodeURIComponent(currentUrl)}`
+              }
+          }
+          return response.json();
+      })
+      .then(data => {
+        // 서버(controller/Cdetail.addLike)에서 온 응답 데이터에 likesCount 속성이 있을 때!
+          if (data.likesCount !== undefined) {
+              document.getElementById('likesCount').innerText = `${data.likesCount} 좋아요`;
+          }
+      })
+      .catch(error => console.error('Error:', error));
+  });
+</script>
+</html>

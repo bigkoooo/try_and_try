@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Popup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: black;
+            color: white;
+        }
+        .comment-form {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .comment-form input {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .char-counter {
+            position: absolute;
+            left: 78%;
+            bottom: 15px;
+            color: gray;
+            font-size: 12px;
+        }
+        .comment-form button {
+            padding: 10px 20px;
+            border: none;
+            background-color: rgb(174, 35, 27);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .comment-form button:hover {
+            background-color: rgb(200, 50, 50);
+        }
+        .comment {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+        }
+        .comment-body {
+            margin: 10px 0;
+        }
+        .comment-footer {
+            display: flex;
+            align-items: center;
+        }
+        .likes {
+            margin-right: 10px;
+        }
+        .comment-action {
+            cursor: pointer;
+            color: rgb(174, 35, 27);
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            background-color: rgb(174, 35, 27);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pagination button:hover {
+            background-color: rgb(200, 50, 50);
+        }
+        .pagination button:disabled {
+            background-color: grey;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <h2>댓글 내용</h2>
+    <div class="comment-form">
+        <input type="text" id="comment-input" placeholder="댓글을 입력하세요">
+        <span class="char-counter" id="char-counter">0</span>
+        <button id="add-comment" data-card-id="<%= cardId %>">추가</button>
+    </div>
+
+    <div id="top-comments-container">
+        <h3>Top Comments</h3>
+        <!-- 상위 댓글 목록이 여기에 추가됩니다 -->
+    </div>
+
+    <div id="comments-container">
+        <!-- 댓글 목록이 여기에 추가됩니다 -->
+        <% if (comments.length === 0) { %>
+            <div class="no-comments">아직 입력된 댓글이 없습니다.</div>
+        <% } else { %>
+            <% comments.forEach(comment => { %>
+                <div class="comment">
+                    <div class="comment-header">
+                        <img src="https://via.placeholder.com/40" alt="Profile Image">
+                        <div class="comment-author"><%= comment.User.nickname %></div>
+                        <div class="comment-options"><%= new Date(comment.createdAt).toLocaleDateString() %></div>
+                    </div>
+                    <div class="comment-body">
+                        <%= comment.comment_contents %>
+                    </div>
+                    <div class="comment-footer">
+                        <span class="likes">👍</span>
+                        <span class="comments">0</span>
+                        <span class="comment-action" data-likes="<%= comment.likes %>">좋아요</span>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    <div class="pagination" id="pagination">
+        <!-- 페이지네이션 버튼들이 여기에 추가됩니다 -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const commentInput = document.getElementById('comment-input');
+            const addCommentButton = document.getElementById('add-comment');
+            const commentsContainer = document.getElementById('comments-container');
+            const charCounter = document.getElementById('char-counter');
+            const paginationContainer = document.getElementById('pagination');
+            const commentsPerPage = 5; // 페이지에 보여줄 댓글 갯수 (5개)
+
+            let currentPage = <%= JSON.stringify(currentPage) %>;
+            let comments = <%- JSON.stringify(comments) %>;
+            let totalPages = <%= JSON.stringify(totalPages) %>;
+            let user = JSON.parse('<%- JSON.stringify(user)%>');
+
+            console.log('Initial comments:', comments); // 콘솔에 초기 댓글 출력
+            console.log('User:', user); // 콘솔에 사용자 정보 출력
+            console.log('Total pages:', totalPages); // 콘솔에 전체 페이지 수 출력
+
+            // 글자 수 업데이트 함수
+            const updateCharCount = () => {
+                charCounter.textContent = commentInput.value.length;
+            };
+
+            // 입력이 변경될 때 글자 수 업데이트
+            commentInput.addEventListener('input', updateCharCount);
+
+            // 댓글 추가 함수
+            const addComment = () => {
+                const text = commentInput.value.trim();
+                const cardId = addCommentButton.getAttribute('data-card-id');
+                if (!user) {
+                    alert('먼저 로그인을 해주세요');
+                    window.location.href = '/user/login'; // 로그인 페이지로 이동
+                    commentInput.value = '';
+                    return;
+                }
+                if (text) {
+                    fetch('/comment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${user.token}` // 토큰을 포함하여 요청을 보냄
+                        },
+                        body: JSON.stringify({ comment_contents: text, card_id: cardId })
+                    }).then(response => {
+                        if (response.ok) {
+                            response.json().then(newComment => {
+                                comments.push(newComment);
+                                totalPages = Math.ceil(comments.length / commentsPerPage);
+                                displayComments(currentPage);
+                                setupPagination(totalPages);
+                            });
+                            commentInput.value = '';
+                            updateCharCount(); // 댓글이 추가되면 글자 수 업데이트
+                        } else {
+                            alert('댓글 추가 실패.');
+                        }
+                    }).catch(error => {
+                        console.error('Error posting comment:', error);
+                        alert('댓글 추가 실패.');
+                    });
+                } else {
+                    alert('댓글을 입력하세요.');
+                }
+            };
+
+            // 댓글 추가 버튼 클릭 이벤트
+            addCommentButton.addEventListener('click', addComment);
+
+            // Enter 키로 댓글 추가 이벤트
+            commentInput.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    addComment();
+                }
+            });
+
+            // 댓글 생성 함수
+            const createComment = (comment) => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+                commentDiv.dataset.id = comment.comment_id;
+
+                const commentHeader = document.createElement('div');
+                commentHeader.className = 'comment-header';
+
+                const commentAuthor = document.createElement('div');
+                commentAuthor.className = 'comment-author';
+                commentAuthor.textContent = comment.User ? comment.User.nickname : '익명';
+
+                const commentOptions = document.createElement('div');
+                commentOptions.className = 'comment-options';
+
+                if (user && user.userId == comment.userid) {
+                    const editButton = document.createElement('button');
+                    editButton.textContent = '수정';
+                    editButton.addEventListener('click', () => {
+                        editComment(commentDiv);
+                    });
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = '삭제';
+                    deleteButton.addEventListener('click', () => {
+                        deleteComment(commentDiv);
+                    });
+
+                    commentOptions.appendChild(editButton);
+                    commentOptions.appendChild(deleteButton);
+                }
+
+                commentHeader.appendChild(commentAuthor);
+                commentHeader.appendChild(commentOptions);
+
+                const commentBody = document.createElement('div');
+                commentBody.className = 'comment-body';
+                commentBody.textContent = comment.comment_contents;
+
+                const commentFooter = document.createElement('div');
+                commentFooter.className = 'comment-footer';
+
+                const likesSpan = document.createElement('span');
+                likesSpan.className = 'likes';
+                likesSpan.textContent = '0';
+
+                const likeButton = document.createElement('span');
+                likeButton.className = 'comment-action';
+                likeButton.innerHTML = '좋아요 <span class="thumb">:+1:</span>';
+                likeButton.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('thumb')) {
+                        likesSpan.textContent = '0';
+                    } else {
+                        let likes = parseInt(likesSpan.textContent);
+                        likes++;
+                        likesSpan.textContent = likes;
+                    }
+                });
+
+                commentFooter.appendChild(likesSpan);
+                commentFooter.appendChild(likeButton);
+
+                commentDiv.appendChild(commentHeader);
+                commentDiv.appendChild(commentBody);
+                commentDiv.appendChild(commentFooter);
+
+                commentsContainer.appendChild(commentDiv);
+            };
+
+            // 댓글 수정
+            const editComment = (comment) => {
+                const commentBody = comment.querySelector('.comment-body');
+                const newText = prompt('댓글을 수정하세요:', commentBody.textContent);
+                if (newText) {
+                    fetch(`/comment/edit/${comment.dataset.id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${user.token}` // 토큰을 포함하여 요청을 보냄
+                        },
+                        body: JSON.stringify({ comment_contents: newText })
+                    }).then(response => {
+                        if (response.ok) {
+                            commentBody.textContent = newText;
+                        } else {
+                            alert('댓글 수정 실패.');
+                        }
+                    });
+                }
+            };
+
+            // 댓글 삭제
+            const deleteComment = (comment) => {
+                if (confirm('정말로 이 댓글을 삭제하시겠습니까?')) {
+                    fetch(`/comment/delete/${comment.dataset.id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${user.token}` // 토큰을 포함하여 요청을 보냄
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            comments = comments.filter(c => c.comment_id !== comment.dataset.id);
+                            totalPages = Math.ceil(comments.length / commentsPerPage);
+                            if (currentPage > totalPages) {
+                                currentPage = totalPages;
+                            }
+                            // 페이지 새로 고침
+                            location.reload();
+                        } else {
+                            alert('댓글 삭제 실패.');
+                        }
+                    });
+                }
+            };
+
+            // 댓글 표시 함수
+            const displayComments = (page) => {
+                commentsContainer.innerHTML = '';
+                const start = (page - 1) * commentsPerPage;
+                const end = start + commentsPerPage;
+                const paginatedComments = comments.slice(start, end);
+                paginatedComments.forEach(comment => {
+                    createComment(comment);
+                });
+            };
+
+            // 페이지네이션 버튼 설정 함수
+            const setupPagination = (totalPages) => {
+                paginationContainer.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.addEventListener('click', () => {
+                        currentPage = i;
+                        displayComments(currentPage);
+                        setupPagination(totalPages);
+                    });
+                    if (i === currentPage) {
+                        button.disabled = true;
+                    }
+                    paginationContainer.appendChild(button);
+                }
+            };
+
+            // 초기 댓글 로드
+            displayComments(currentPage);
+            setupPagination(totalPages);
+
+            // 초기 글자 수 업데이트
+            updateCharCount();
+        });
+    </script>
+</body>
+</html>
