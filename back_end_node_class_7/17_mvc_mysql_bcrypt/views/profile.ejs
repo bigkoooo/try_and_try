@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<%- include('include/include', { title: '회원 정보' }) %>
+<body>
+  <h1>회원 정보</h1>
+  <a href="/user">HOME</a>
+  <p>ID 수정 불가능, Password, Name 수정 가능</p>
+  <form name="form_profile">
+    <label for="userid">ID</label>
+    <input type="hidden" id="id" name="id" value="<%= data.id %>" />
+    <input id="userid" type="text" name="userid" value="<%= data.userid %>" readonly /><br />
+    <label for="password">Password</label>
+    <input id="password" type="password" name="pw" value="<%= data.pw %>" required /><br />
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" value="<%= data.name %>" required /><br />
+    <button type="button" onclick="profileEdit();">Edit</button>
+    <button type="button" onclick="profileDelete();">Delete</button>
+  </form>
+  <br><br>
+  <button type="button" class="logout-button" onclick="logout();">Logout</button>
+
+  <script>
+    function profileEdit() {
+      const form = document.forms['form_profile'];
+
+      axios({
+        method: 'PATCH',
+        url: '/user/profile/edit',
+        headers: {
+          Authorization: localStorage.getItem('token') // 토큰 헤더 추가
+        },
+        data: {
+          id: form.id.value,
+          pw: form.password.value,
+          name: form.name.value
+        }
+      }).then((res) => {
+        console.log(res);
+        alert('회원 정보가 수정되었습니다.');
+        editCancel();
+      }).catch((error) => {
+        console.error('Error:', error);
+        alert('회원 정보 수정 중 오류가 발생했습니다.');
+      });
+    }
+
+    function profileDelete() {
+      const form = document.forms['form_profile'];
+
+      axios({
+        method: 'DELETE',
+        url: '/user/profile/delete',
+        headers: {
+          Authorization: localStorage.getItem('token')
+        },
+        data: {
+          id: form.id.value
+        }
+      }).then((res) => {
+        console.log(res);
+        alert('회원 정보가 삭제되었습니다.');
+        window.location.href = '/user/signin';
+      }).catch((error) => {
+        console.error('Error:', error);
+        alert('회원 정보 삭제 중 오류가 발생했습니다.');
+      });
+    }
+
+    function editCancel() {
+      const form = document.forms['form_profile'];
+      form.password.value = '';
+      form.name.value = '';
+    }
+
+    function logout() {
+      localStorage.removeItem('token'); // 토큰 제거
+      alert('로그아웃 되었습니다.');
+      window.location.href = '/user/signin';
+    }
+  </script>
+</body>
+</html>

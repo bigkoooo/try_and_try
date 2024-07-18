@@ -44,6 +44,8 @@ const saltAndHashPw = (pw) => {
     }
 }
 
+
+
 // --------------------------------------------
 // 비밀번호 비교 함수
 const comparePw = (inputPw, savedSalt, savedHash) => {
@@ -72,6 +74,6 @@ const password = '1234!'; // 정답 비밀번호
 const { salt, hash } = saltAndHashPw(password);
 console.log(`Salt: ${salt} // Hash: ${hash}`);
 
-const inputPassword = '1234!#'; // 주장하는 비밀번호
+const inputPassword = '1234!'; // 주장하는 비밀번호
 const isMatch = comparePw(inputPassword, salt, hash); 
 console.log(`비밀번호가 ${isMatch ? '일치합니다.' : '일치하지 않습니다.'}`);

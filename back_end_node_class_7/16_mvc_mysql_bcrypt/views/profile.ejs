@@ -89,18 +89,17 @@
 
     // 로그아웃 함수
     function logout() {
-      axios({
-        method: 'POST',
-        url: '/user/logout'
-      }).then((res) => {
-        alert('로그아웃 되었습니다.');
-        window.location.href = '/user/signin'; 
-      }).catch((error) => {
-        console.error('Error in logout:', error);
-        alert('로그아웃 중 오류가 발생했습니다.');
-      });
-    }
-
+    axios.post('/user/logout')
+        .then((res) => {
+            alert(res.data.message);
+            localStorage.removeItem('token'); // 클라이언트 측에서 토큰 삭제
+            window.location.href = '/user/signin';
+        })
+        .catch((error) => {
+            console.error('Error in logout:', error);
+            alert('로그아웃 중 오류가 발생했습니다.');
+        });
+}
 
     document.addEventListener('DOMContentLoaded', function() {
       setInterval(function() {

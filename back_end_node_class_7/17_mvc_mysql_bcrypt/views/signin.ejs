@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <%- include('include/include', { title: '로그인' }) %>
+  <body>
+    <h1>로그인</h1>
+    <form name="form_login">
+      <label for="userid">ID</label>
+      <input id="userid" type="text" name="userid" required /><br />
+      <label for="password">Password</label>
+      <input id="password" type="password" name="pw" required /><br />
+      <button type="button" onclick="login();">Login</button>
+    </form>
+    <a href="/user/signup">Register</a>
+
+    <script>
+      function login() {
+        const form = document.forms['form_login'];
+
+        axios.post('/user/signin', {
+          userid: form.userid.value,
+          pw: form.password.value
+        }).then((res) => {
+          console.log(res);
+          localStorage.setItem('token', res.data.token); // 토큰 저장
+          window.location.href = '/user/profile';
+        }).catch((error) => {
+          console.error('Error:', error);
+          if (error.response && error.response.data) {
+            alert(error.response.data.message);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -83,9 +83,14 @@ exports.checkToken = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-    res.send({ message: '로그아웃 되었습니다.' });
+    try {
+        // 클라이언트 측에서 토큰 삭제를 유도하기 위해 빈 토큰을 전송
+        res.send({ message: '로그아웃 되었습니다.' });
+    } catch (error) {
+        console.error('Error in logout:', error);
+        res.status(500).send({ message: '로그아웃 중 오류가 발생했습니다.' });
+    }
 };
-
 exports.patchProfile = async (req, res) => {
     try {
         const { id, pw, name } = req.body;
