@@ -17,7 +17,7 @@ const getTop3Cards = async (category) => {
         limit: 3
     });
 
-    // 각 카드에 대한 댓글 가져오기
+    // 각 카드에 대한 상위 2개의 댓글 가져오기
     for (const card of cards) {
         const comments = await db.Comment.findAll({
             where: { card_id: card.card_id },
@@ -25,7 +25,23 @@ const getTop3Cards = async (category) => {
                 model: db.User,
                 attributes: ['nickname'],
             }],
-            order: [['createdAt', 'DESC']]
+            attributes: {
+                include: [
+                    [
+                        db.Sequelize.literal(`(
+                            SELECT COUNT(*)
+                            FROM CommentLike AS cl
+                            WHERE cl.comment_id = Comment.comment_id
+                        )`),
+                        'likeCount'
+                    ]
+                ]
+            },
+            order: [
+                [db.Sequelize.literal('likeCount'), 'DESC'],
+                ['createdAt', 'DESC']
+            ],
+            limit: 2
         });
         card.comments = comments; // 카드 객체에 댓글 추가
     }
