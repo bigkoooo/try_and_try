@@ -65,12 +65,29 @@ exports.logout = (req, res) => {
     }
 };
 
-// 로그인 상태 확인 함수 
+//변경전 로그인 확인 함수 - 단순히 쿠키에 토큰이 있는지 여부만 확인함
+// // 로그인 상태 확인 함수 
+// exports.checkLoginStatus = (req, res) => {
+//     if (req.cookies.token) {
+//         res.json({ isLoggedIn: true });
+//     } else {
+//         res.json({ isLoggedIn: false });
+//     }
+// };
+
+// 로그인 상태 확인 함수 - 토큰이 있는 경우 jwt.verify를 사용하여 토큰의 유효성을 검사
 exports.checkLoginStatus = (req, res) => {
-    if (req.cookies.token) {
-        res.json({ isLoggedIn: true });
+    const token = req.cookies.token;
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) {
+                return res.json({ isLoggedIn: false });
+            } else {
+                return res.json({ isLoggedIn: true });
+            }
+        });
     } else {
-        res.json({ isLoggedIn: false });
+        return res.json({ isLoggedIn: false });
     }
 };
 
@@ -101,14 +118,5 @@ exports.checkDuplicateId = async (req, res) => {
     } catch (error) {
         console.error('Error in checkDuplicateId:', error);
         res.status(500).send({ message: error.message });
-    }
-};
-
-// 로그인 상태 확인 함수 (중복 정의 제거)
-exports.checkLoginStatus = (req, res) => {
-    if (req.cookies.token) {
-        res.json({ isLoggedIn: true });
-    } else {
-        res.json({ isLoggedIn: false });
     }
 };
