@@ -56,3 +56,26 @@ li.completed {
     text-decoration: line-through;
     color: #888;
 }
+
+/* Responsive Design */
+@media (min-width: 400px) and (max-width: 500px) {
+    #app {
+        width: 300px; /* 원래 #app의 넓이 */
+        padding: 20px; /* 원래 #app의 패딩 */
+        transform: scale(0.9);
+        transform-origin: center;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px;
+    }
+
+    li {
+        padding: 8px;
+    }
+}
+
