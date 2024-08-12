@@ -1,10 +1,10 @@
+import PracHooks from './pracHooks';
 import './App.css';
-import Form from './react-hook-form/Form';
 
 function App() {
   return (
     <div className="App">
-      <Form />
+      <PracHooks />
     </div>
   );
 }

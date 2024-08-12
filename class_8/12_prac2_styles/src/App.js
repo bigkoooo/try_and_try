@@ -1,10 +1,10 @@
+import MoveLarva from './moveLarva';
 import './App.css';
-import Form from './react-hook-form/Form';
 
 function App() {
   return (
     <div className="App">
-      <Form />
+      <MoveLarva />
     </div>
   );
 }
