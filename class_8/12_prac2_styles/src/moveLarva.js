@@ -4,10 +4,10 @@ import './styles/moveLarva.scss'
 export default function MoveLarva() {
   return (
     <>
-        <div className="larva">
-            <div className="body body1"></div>
-            <div className="body body2"></div>
-            <div className="body body3"></div>
+        <div className="container">
+            <div className="ball redball"></div>
+            <div className="ball yellowball"></div>
+            <div className="ball blueball"></div>
         </div>
     </>
   );

@@ -1,0 +1,66 @@
+/* 전체 배경과 페이지 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e6f0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 헤더 스타일 */
+.header {
+    background-color: #3d7cf4;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 포스트 리스트 스타일 */
+.post-list {
+    max-width: 600px;
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 각 포스트의 컨테이너 스타일 */
+.post-wrapper {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+/* 포스트 제목 스타일 */
+.post-title {
+    margin: 0;
+    font-weight: bold;
+    font-size: 16px;
+    color: #3d7cf4;
+}
+
+/* 포스트 제목 번호 스타일 */
+.post-title-postno {
+    color: #6f8ce3;
+}
+
+/* 포스트 본문 스타일 */
+.post-body {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #333333;
+}
+
+/* 포스트 wrapper의 hover 효과 */
+.post-wrapper:hover {
+    transform: translateY(-5px);
+}
