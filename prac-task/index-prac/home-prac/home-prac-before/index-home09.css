@@ -1,0 +1,14 @@
+
+
+div div{
+    width: 500px;
+    height: 500px;
+    
+    border: 20px solid ;
+    background-image: url(../../../사진폴더/bora.webp);
+    background-size:auto;
+    background-repeat: no-repeat;
+    border-image: linear-gradient(45deg, orange, yellow) ;
+    border-image-slice: 1;
+} 
+   

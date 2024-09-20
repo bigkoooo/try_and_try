@@ -1,0 +1,61 @@
+nav{
+    background-color: lightskyblue;
+    width: 100%;
+    height: 100px;
+    
+}
+
+
+.containbox{
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0%;
+    height: 30%;
+}
+
+@media (max-width: 768px) {
+    .trouble{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 25%;
+        color: aliceblue;        
+    }  
+        
+    .containbox{
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0%;
+        margin: 0%;
+    }
+
+    .menu{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        height: 25%;
+
+    }
+
+    .box1{
+        background-color: darkcyan
+    }
+
+    .box2{
+        background-color: rgb(2, 173, 53);
+    }
+
+    .box3{
+        background-color: rgb(5, 206, 206);
+    }
+
+    .box4{
+        background-color: rgb(6, 235, 235);
+    }
+}

@@ -1,0 +1,26 @@
+.insta{
+    width: 500px;
+    height: 500px;
+    padding: 12px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, yellow, orange);
+    position: relative;
+    top: 300px;
+    left: 200px; 
+    border: 1px solid rgb(243, 243, 243);
+}
+
+div div{
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 2px solid rgb(243, 243, 241);
+    background-image: url(../../../사진폴더/bora.webp);
+    background-size:auto;
+    background-repeat: no-repeat;
+    position:absolute;
+    box-sizing: border-box;
+    
+  
+   
+}

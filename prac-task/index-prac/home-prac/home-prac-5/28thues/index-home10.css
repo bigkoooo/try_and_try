@@ -1,0 +1,79 @@
+header
+* {
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  background-color: pink;
+}
+
+h1 {
+  text-align: center;
+  color: green;
+  margin-bottom: 60px;
+}
+
+header {
+  height: 60px;
+  background-color: #ddd;
+  padding: 0 20px;
+  margin-bottom: 50px;
+}
+
+
+/* TODO: header1 ~ 3까지 완성해주세요! */
+
+/* header1 */
+.header1 {
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.header1 > ul li{
+    display: inline;
+}
+
+
+
+/* header2 */
+.header2 {
+  /* display: flex;
+  align-items: center; */
+  align-content: center;
+}
+
+.header2 > ul {
+    
+    
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    
+}
+
+
+/* header3 */
+.header3 {
+display: flex;
+align-items:center;
+justify-content: space-between;    
+
+}
+
+.header3 > ul li{
+    display: inline;
+}

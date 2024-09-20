@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #000000;
+    color: white;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 15vw; /* 창 크기에 따라 간격 조절 */
+    margin-top: 120px;
+    position: relative; /* 카드가 겹치도록 위치를 상대적으로 설정 */
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#card1 {
+    background-image: url('https://via.placeholder.com/200x300.png?text=Card+1');
+    z-index: 3; /* 맨 위로 */
+}
+
+#card2 {
+    background-image: url('https://via.placeholder.com/200x300.png?text=Card+2');
+    z-index: 2; /* 중간 */
+}
+
+#card3 {
+    background-image: url('https://via.placeholder.com/200x300.png?text=Card+3');
+    z-index: 1; /* 맨 아래로 */
+}
+
+/* 미디어 쿼리 추가 */
+@media (max-width: 750px) {
+    .card-container {
+        gap: 0; /* 카드 간의 간격을 없앰 */
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .card {
+        position: absolute; /* 카드들을 겹치게 배치 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #card1 {
+        transform: translate(-50%, -60%) rotate(-10deg); /* 첫 번째 카드의 위치와 각도 조정 */
+    }
+
+    #card2 {
+        transform: translate(-50%, -50%) rotate(0deg); /* 두 번째 카드의 위치와 각도 조정 */
+    }
+
+    #card3 {
+        transform: translate(-50%, -40%) rotate(10deg); /* 세 번째 카드의 위치와 각도 조정 */
+    }
+}

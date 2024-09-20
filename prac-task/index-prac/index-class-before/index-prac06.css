@@ -1,0 +1,27 @@
+.no1:hover{
+    background-color: pink;
+    color: hotpink;
+}
+
+.no2:focus{
+    background-color: aquamarine;
+}
+
+input:checked[type="checkbox"] + label[for="red"]{
+    background-color: rgb(200, 132, 48);
+}
+input:checked[type="checkbox"] + label[for="blue"]{
+    background-color: rgb(14, 176, 39);
+}
+input:checked[type="checkbox"] + label[for="yellow"]{
+    background-color: rgb(48, 190, 200);
+}
+
+button:focus{
+    background-color: brown;
+}
+
+button:active{
+    color: gold;
+    background-color: rebeccapurple;
+}

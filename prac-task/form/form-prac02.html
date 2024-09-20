@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form-prac02</title>
+</head>
+<body>
+    <h1>설문조사</h1>
+        <form>
+            <label for="name">이름</label>
+            <input type="text" value="이름" id="name">
+            <label for="user@email.com">이메일</label>
+            <input type="text" value="abc@amail.com" placeholder="abc email.com" id="user@email.com">
+
+            <h2>나이</h2>
+            <input type="radio" name="age" id="10's" value="10대">10대
+            <input type="radio" name="age" id="20's" value="20대">20대
+            <input type="radio" name="age" id="30's" value="30대">30대
+            <input type="radio" name="age" id="40's" value="40대">40대
+            <input type="radio" name="age" id="50's" value="50대">50대
+            <input type="radio" name="age" id="60's" value="60대 이상">60대 이상
+            
+            <h2>원하는 강의(복수응답가능합니다.)</h2>
+            <input type="checkbox" id="html" value="html" name="lecture">html
+            <input type="checkbox" id="javascript" value="javascript" name="lecture">javascript
+            <input type="checkbox" id="css" value="css" name="lecture">css
+            <br><br><br>
+            <textarea name="want" id="want" cols="30" rows="10" placeholder="하고 싶은 말을 써주세요 ^,^"></textarea>
+
+            
+
+
+        </form>
+</body>
+</html>

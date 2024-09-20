@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tag 종류에 대해 배워보자!</h1>
+    <h2>두번쨰로 큰 제목</h2>
+    <h3>세번째로 큰 제목</h3>
+    <h4>네번쨰로 큰 제목</h4>
+    <h5>다섯번쨰로 큰 제목</h5>
+    <h6>여섯번쨰로 큰 제목</h6>
+    <h7>제목??</h7>
+    <br><br><br>
+    <p>여기는 본문 영역입니다. 어쩌구 저쩌구~~~~</p>
+    <p>여기는 본문 영역입니다. 어쩌구 저쩌구~~~~</p>
+    <p>여기는 본문 영역입니다. 어쩌구 저쩌구~~~~</p>
+<!-- ul tag type attriute: disc(default), square, circle, none -->
+    <h3>오늘의 할 일</h3>
+    <ul type="square">
+            <li>HTML 복습하기</li>
+            <li>운동하기</li>
+            <li>Git 명령어 연습하기</li>
+    </ul>
+<!-- ol tag type attribute: 1(default), a, A, i, I  -->
+<!-- start attr: 시작번호, reversed:역순으로  -->
+    <h3>아이스 카페라떼 레시피</h3>
+    <ol type="1" start="2" reversed>
+        <li><strong>우유</strong> <em>180ml</em>에 컵에 넣어주세요</li>
+        <li><b>얼음</b>을 컵에 가득 넣어주세요</li>
+        <li><i>에스프레소</i> 샷을 넣어주면</li>
+        <li><u>완성!</u> <del>맛있게 드세요!</del></li>
+    </ol>
+
+    <!-- 수평줄 태그 -->
+    <hr>
+
+    <!-- 목록 태그의 중첩 사용 -->
+    <h3>내가 좋아하는 음식</h3>
+    <ul>
+        <li>
+            양식
+            <ul>
+                <li>스파게티</li>
+                <li>스테이크</li>
+                <li>와인한잔</li>
+            </ul>
+        </li>
+        <li>
+            한식
+            <ul>
+                <li>김치찌개</li>
+                <li>국밥</li>
+                <li>된장찌개</li>
+            </ul>
+        </li>
+        <li>
+            일식
+            <ul>
+                <li>사시미</li>
+                <li>와규</li>
+                <li>라멘</li>
+            </ul>
+
+        </li>
+    </ul>
+자동 반영 되는 거냐? 안되는거 같은데, 아 우측 아래에 있는 것이 자동으로 반영되는지,되네 된다
+    <hr>
+    <h2>img 태그</h2>
+    <!-- 상대경로: 상대 경로를 쓸때는 ./ 안써도 상관없음 왜냐면 현재 위치를 알려주기 때문 -->
+    <!-- 상대경로는 현재 위치를 기준으로 하는 상대적인 경로 -->
+    <!-- 목적 파일(다운로드.jpeg)의 위치가 바뀐다면 상대경로를 수정해야 한다는 단점 -->
+    <!-- 하지만 목적파일이 아닌 프로젝트, 즉 상단 폴더(프로젝트) 위치는 바뀌여도 어디서든 쓸 수 있다는 장점 -->
+    <!-- ex ./src/img/img.png -->
+    <img src="./다운로드.jpeg" alt="무 모양의 거대한 나무" width="300" height="300">
+    <!-- 절대경로 root(맨 처음, 최상단)부터 해당 파일까지의 경로-->
+    <!-- 네 로컬 환경에서는 어느 곳에서든 접근이 가능하다는 것이 장점 -->
+    <!-- 단점은 다른 로컬에서는 절대 경로가 정확히 동일해야만 접근이 가능함-이 경우는 매우 희박함s -->
+    <img src="/Users/sba/Documents/github/try_and_try/다운로드.jpeg" alt="무 모양의 거대한 나무">
+    <!-- 인터넷 이미지 주소로도 지정할 수 있음 -->
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAA4CAMAAABe34GAAAAAZlBMVEUAAAD////u7u6Dg4OTk5NkZGSsrKzg4OD19fWLi4vZ2dkVFRUyMjL6+vppaWnm5uZXV1d5eXnS0tIqKipeXl47Ozu2trafn5/BwcEiIiIaGhrLy8uZmZlSUlKlpaVvb28LCwtFRUUINVvnAAABgUlEQVRIiZXW63qCMAwG4EDlaDkqiEPB3f9NjtJGixz6Lf/o3ofFpG0g7zB60dysRzqy3Z2ITqAOSEUI6UzOmGpINxovwK5ODK4QXRhMEaLzrVfv6Zg2st7VrcEFpPVvPH/hPT2nnayWd7T4KYd4vWzrLO3rr/+dtkPYRWsdP0ynRcpLXcCVqdKl5tapkOGURGSvEAXxRxdnWsb38xQp63T9t42otfYhrFql9AXDctYnDAdz3rEbqrjqmmCvvpt6bxRrI3R7KMLzmHQI6d7oCtK8q0oEP1lLRAvWL0TzKUKs9W6o3Dnrxm2JLqyvUCr+v+ptBgQNkDbtoR7TuoYEbm+9U8iDmkl85hM31NEqXaOaAp/Q5quQk37AeiD88qGpft5nIrkin++qwg3niPStOUI4MHcs1k+f72/kmrh9ZsPTiaU1Sdy5FPbccfW/XUwp7/hUiOVMW176cqxG+3jzl4Q1Xbkwl1BP4Szkrf/+bLNnsZ80r19hf0fVSSnLk/9+/gNKNAxPI/SsfAAAAABJRU5ErkJggg==" alt="apple">
+    <hr>
+    <!-- a tag target attribute: 링크가 열릴 위치 지정
+        -_self(default) : 현재 탭에서 열기
+        -_blank : 새창에서 열기 -->
+    <a href="http://naver.com" target="_self">네이버 바로 가기</a>
+    <a href="http://naver.com" target="_blank">네이버 바로 가기</a>
+    <a href="http://naver.com" target="_blank" title="마우스를 올리면 나타나는 제목">네이버 바로 가기</a>
+    <a href="./html-start.html" target="_blank" title="마우스를 올리면 나타나는 제목">내꺼 바로 가기</a>
+
+    <!-- a 태그의 href 속성 값으로는 인터넷 상의 주소 뿐만 아니라 프로젝트 폴더 내의 다른 HTML 문서으이 주솔를 넣어도 됨 -->
+    <img src="./태초마을.png" alt="zero base">
+
+</body>
+</html>

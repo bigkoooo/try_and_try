@@ -1,0 +1,48 @@
+img{
+    width: 300px; height: 300px;
+}
+
+.container{
+    position: relative;
+    width: 2000px;
+    height: 2000px;
+    background-color: gray;
+}
+
+.pic{
+    transform: skewY(30deg);
+    transition: 1s;
+    position: absolute;
+}
+
+.item1{
+    top: 400px;
+    left: 100px;
+    z-index: 3;
+}
+
+.item1:hover{
+    transform: skew(0deg);
+}
+
+.item2{
+    top: 250px;
+    left: 200px;
+    z-index: 2;
+}
+
+.item2:hover{
+    transform: skew(0deg);
+    z-index: 3;
+}
+
+.item3{
+    top: 100px;
+    left: 300px;
+    z-index: 1;
+}
+
+.item3:hover{
+    transform: skew(0deg);
+    z-index: 3;
+}

@@ -1,0 +1,51 @@
+.grey{
+    background-color: grey;
+}
+
+.item1{
+    position: relative;
+    top: 60px;
+    left: 580px;
+    transform: skewY(30deg);
+    z-index: 1;
+}
+
+.item1:hover{
+    transform: skew(0deg);
+    transition: 1s;
+    z-index: 4;
+}
+
+.item2{
+    position: relative;
+    top: 60px;
+    left: 480px;
+    transform: skewY(30deg);
+    z-index: 2;
+}
+
+.item2:hover{
+    transform: skew(0deg);
+    transition: 1s;
+    z-index: 4;
+}
+
+
+.item3{
+    position: relative;
+    top: 60px;
+    left: 380px;
+    transform: skewY(30deg);
+    z-index: 3;
+}
+
+.item3:hover{
+    transform: skew(0deg);
+    transition: 1s;
+    z-index: 4;
+}
+
+.pic{
+    width: 100px;
+    height: 100px;
+}

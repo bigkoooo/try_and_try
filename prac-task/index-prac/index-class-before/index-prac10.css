@@ -1,0 +1,84 @@
+div {
+    width: 100px;
+    height: 100px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px;
+
+    position: absolute;
+}
+
+/* 
+    Z-index
+    - 겹치는 요소에 대한 ㅅㄴ서를 결정
+    - 숫자값: 양수, 0, 음수
+    - 숫자값이 클수록 더 위에 쌓임. (가장 앞에 놓인다)
+*/
+
+.div1 {
+    top: 100px;
+    left: 100px;
+    background-color: rgb(44, 5, 239);
+    z-index: 0;
+    border-radius: 50%;
+}
+
+.div6 {
+    top: 130px;
+    left: 110px;
+    background-color: rgb(236, 227, 227);
+    z-index: 10;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.div8 {
+    top: 140px;
+    left: 110px;
+    background-color: rgb(15, 14, 14);
+    z-index: 10;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.div2 {
+    top: 140px;
+    left: 140px;
+    background-color: rgb(126, 80, 225);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.div3 {
+    top: 180px;
+    left: 180px;
+    background-color: rgb(147, 144, 233);
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.div4 {
+    top: 220px;
+    left: 220px;
+    background-color: rgb(113, 130, 188);
+    z-index: 3;
+    border-radius: 50%;
+}
+.div5 {
+    top: 260px;
+    left: 260px;
+    background-color: rgb(185, 185, 225);
+    z-index: 4;
+    border-radius: 50%;
+}
+
+
+.img {
+    top: 350px;
+    left: 0px;
+    z-index: -1;
+    position: absolute;
+
+}

@@ -1,0 +1,33 @@
+
+<!-- ! + tab = 이렇게 단축키를 치면 구조를 바로 만들어줌, 이런 단축키를 emmet이라고 함 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 인코딩 방식 지정 / 인코딩? 사람을 위한 이 언어들이 컴퓨터가 이해하기 위한 0,1로 변경되야 하는데 그 방식을 인코딩 방식이라고 함 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 모바일/반응형 웹에서 인식할 수 있는 태그, 모바일이든 PC든 들어가는 형태에 따라 디자인이 알아서 맞춰서 변경되는 것 -->
+    <title>Document</title>
+    <!-- 문서의 제목을 의미하는 태그, 파일명이 문서의 제목이 아님- 브라우저 탭에 뜨는 제목임 -->
+</head>
+<body>
+    <!-- 브라우저 화면에서 보여주고 싶은 내용 -->
+    <!-- emmet : 태그이름 +  tab -->
+    <h1>나의 첫 HTML 문서입니다.</h1>
+    <div>안녕하세요, koo 입니다!!</div>
+
+    <!-- 중첩(nested) -->
+    <!-- div: 블록(block)요소 / span: 인라인(inline)요소 -->
+    <div style="background-color: aquamarine;">
+        span의 parentß
+        <span style="background-color: antiquewhite;">div의 child</span>
+        <span style="background-color:brown">div의 child</span>
+        <!-- 블록 잡고 tab 누르면 안쪽으로 한칸씩 이동하고, shift + tab 누르면 반대로 앞으로 한칸씩 나옴 -->
+        <!-- 위 단축키를 이용해서 반드시 중첩관계를 표현할 때 부모자식 관계를 명확히 표기 하도록 하자 -->
+        <!-- 수정한번 더 해보면 되지 않을까? -->
+
+    </div>
+    <div style="background-color: blueviolet;">또 다른 div</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form 만들기 실습</title>
+</head>
+<body>
+    <h1>설문조사</h1>
+    이름<input type="name" id="name" placeholder="이름" name="" ><br>
+    <label for="uesr-email">이메일</label>
+    <input type="email" id="uesr-email" placeholder="abc@test.com" name="" >
+
+<!-- value는 컴퓨터로 날라가는 즉, 서버로 보내지는 값이라고 생각하고
+     id는 서버자체가 아 이거는 어떤 버튼이구나 하고 인식하는 값이기 때문에 두개가 틀려도 상관없음
+    오히려 서버로 날라가는 출력값과 실제 이용자가 인식하는 값이 똑같아야 하기 때문에 value랑 실이용자에게 보여지는 설명을 같게 함
+    그리고 아까 설명했다싶이 네임으로 체크박스들이 한 카테고리 안에 들어가는 선택지라는걸 인식시켜주시 않으면 
+    각각 개별 카테고리라고 인식하기 때문에 베타적 선택이 안되고 중복 선택이 가능해지는 거임-->
+    <h2>나이</h2>
+    <input type="radio" name="age" value="10대" id="10"><label for="10">10대</label>
+    <input type="radio" name="age" value="20대" id="20"><label for="20">20대</label>
+    <input type="radio" name="age" value="30대" id="30"><label for="30">30대</label>
+    <input type="radio" name="age" value="40대" id="40"><label for="40">40대</label>
+    <input type="radio" name="age" value="50대" id="50"><label for="50">50대</label>
+    <input type="radio" name="age" value="60대" id="60"><label for="60">60대 이상</label>
+
+    <h2>원하는 강의(복수응답가능합니다.)</h2>
+    <input type="checkbox" name="interest" value="basketball" checked>html
+    <input type="checkbox" name="interest" value="movie">javascript
+    <input type="checkbox" name="interest" value="lay-down"> Css
+    <br>
+    <textarea placeholder="하고 싶은 말 써주세요 :-ㅣ" cols="30" rows="10"></textarea>
+
+
+</body>
+</html>

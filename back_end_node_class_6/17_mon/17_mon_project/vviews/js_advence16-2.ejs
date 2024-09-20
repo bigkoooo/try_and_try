@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Dog Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>API Dog Example</h1>
+
+    <button onclick="getRandomDogImage();">랜덤 강아지 사진 가져오기</button>
+
+    <div class="result"></div>
+
+    <script>
+        const resultBox = document.querySelector('.result');
+
+        async function getRandomDogImage() {
+            try {
+                const response = await axios.get('https://api.thedogapi.com/v1/images/search');
+                //api Endpoint로 .get를 통해 요청을 보냄 -> Endpoint는 일종의 해당 api의 gateWay라고 생각하면 됨 
+                const imageUrl = response.data[0].url;
+                //API응답에서 첫번째 강아지 사진의 url추출 후 imgUrl에 저장 -> 애초에 첫번째 페이지는 0이라고 페이지가 지정되어 있음, 밑에 API 조건 참조
+                //https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1
+                const dogImg = `<img src="${imageUrl}" alt="하면서도 이게 맞는지 모르겄다">`;
+                //추출된 0번째 그니깐 첫번째 강아지 사진 url을 이미지 소스에 삽입 후 dogImg상수에 저장
+                resultBox.innerHTML = dogImg;
+                // 위 div박스에 innerHTML로 삽입!!!
+            } catch (error) {
+                console.error('Error fetching dog image:', error);
+                resultBox.textContent = '강아지 사진을 불러오는 중 오류가 발생, 이유는 나도 모름';
+            }
+        }
+    </script>
+</body>
+</html>

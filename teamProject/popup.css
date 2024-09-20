@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: black;
+    color: white; /* 기본 텍스트 색상을 하얀색으로 설정 */
+}
+.comment-form {
+    margin-bottom: 20px;
+    position: relative;
+}
+.comment-form input {
+    width: 80%; /* 가로 길이를 80%로 설정 */
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.char-counter {
+    position: absolute;
+    left: 78%; /* 숫자를 좀 더 좌측으로 이동 */
+    bottom: 15px;
+    color: gray;
+    font-size: 12px;
+}
+.comment-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(174, 35, 27);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.comment-form button:hover {
+    background-color: rgb(200, 50, 50);
+}
+.comment {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+}
+.comment-body {
+    margin: 10px 0;
+    color: white; /* 댓글 텍스트 색상을 하얀색으로 설정 */
+}
+.comment-footer {
+    display: flex;
+    align-items: center;
+}
+.likes {
+    margin-right: 10px;
+}
+.comment-action {
+    cursor: pointer;
+    color: rgb(174, 35, 27);
+}

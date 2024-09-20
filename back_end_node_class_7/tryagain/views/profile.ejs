@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <%- include('include/include', { title: '회원 정보' }) %>
+
+  <style>
+    .logout-button {
+      background-color: #B2F4D4; 
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background-color: #A3E4C3; 
+    }
+  </style>
+</head>
+<body>
+
+  <h1>회원 정보</h1>
+  <a href="/user">HOME</a>
+  <p>ID 수정 불가능, Password, Name 수정 가능</p>
+
+  <form name="form_profile">
+    <label for="userid">ID</label>
+    <input type="hidden" id="id" name="id" value="<%= data.id %>" />
+    <input id="userid" type="text" name="userid" value="<%= data.userid %>" readonly /><br />
+    <label for="password">Password</label>
+    <input id="password" type="password" name="pw" value="<%= data.pw %>" required /><br />
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" value="<%= data.name %>" required /><br />
+    <button type="button" onclick="profileEdit();">Edit</button>
+    <button type="button" onclick="profileDelete();">Delete</button>
+  </form>
+  <br><br>
+  <button type="button" class="logout-button" onclick="logout();">Logout</button>
+
+  <script>
+    // 토큰 가져오기
+    const token = localStorage.getItem('token');
+  
+    // Edit 버튼 클릭 시 서버에 회원 정보 수정 요청하기
+    function profileEdit() {
+      const form = document.forms['form_profile'];
+  
+      axios({
+        method: 'PATCH', // PATCH 메서드를 사용하여 부분 업데이트를 수행
+        url: '/user/profile/edit',
+        headers: { 'Authorization': `Bearer ${token}` },
+        data: {
+          id: form.id.value,
+          pw: form.password.value,
+          name: form.name.value
+        }
+      }).then((res) => {
+        console.log(res);
+        alert('회원 정보가 수정되었습니다.');
+        // 입력창 초기화
+        editCancel();
+      }).catch((error) => {
+        console.error('Error:', error);
+        alert('회원 정보 수정 중 오류가 발생했습니다.');
+      });
+    }
+  
+    // Delete 버튼 클릭 시 서버에 회원 정보 삭제 요청하기
+    function profileDelete() {
+      const form = document.forms['form_profile'];
+  
+      axios({
+        method: 'DELETE', // DELETE 메서드를 사용하여 삭제를 수행
+        url: '/user/profile/delete',
+        headers: { 'Authorization': `Bearer ${token}` },
+        data: {
+          id: form.id.value
+        }
+      }).then((res) => {
+        console.log(res);
+        alert('회원 정보가 삭제되었습니다.');
+        window.location.href = '/user/signin'; // 삭제 후 로그인 페이지로 리다이렉트
+      }).catch((error) => {
+        console.error('Error:', error);
+        alert('회원 정보 삭제 중 오류가 발생했습니다.');
+      });
+    }
+  
+    // 입력창 초기화 함수
+    function editCancel() {
+      const form = document.forms['form_profile'];
+      form.password.value = '';
+      form.name.value = '';
+    }
+  
+    // 로그아웃 함수
+    function logout() {
+      localStorage.removeItem('token'); // 토큰 제거
+      alert('로그아웃 되었습니다.');
+      window.location.href = '/user/signin';
+    }
+  
+    document.addEventListener('DOMContentLoaded', function() {
+      setInterval(function() {
+        axios.get('/user/check-token', { headers: { 'Authorization': `Bearer ${token}` } })
+          .then(response => {
+            if (!response.data.loggedin) {
+              alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+              window.location.href = '/user/signin';
+            }
+          })
+          .catch(err => console.error(err));
+      }, 5000); // 5초마다 서버에 세션 상태를 확인
+    });
+  </script>
+  
+</body>
+</html>

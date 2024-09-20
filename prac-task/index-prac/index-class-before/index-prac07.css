@@ -1,0 +1,8 @@
+div{
+    border-style: dashed solid double groove;
+    border-width: 5px 10px 15px 20px;
+    border-color: red yellow yellowgreen blanchedalmond;
+    border-radius: 10% 15% 20% 25%;
+    height: 100px;
+    width: 300px;
+}

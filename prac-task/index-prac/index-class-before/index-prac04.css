@@ -1,0 +1,22 @@
+.stripes > *{
+    background-color: navy;
+    color: aliceblue;
+}
+
+/* .stripes > *:nth-child(2){
+    background-color: yellow;
+    color: navy;
+}
+.stripes > *:nth-child(5){
+    background-color: yellow;
+    color: navy;
+}
+.stripes > *:nth-child(10){
+    background-color: yellow;
+    color: navy;
+} */
+
+.stripes >*:nth-child(4n+3){
+    background-color: yellow;
+    color: navy;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Popup Example</title>
+</head>
+<body>
+    <p>프론트에서 했던거 기억이 진짜 1도 안난다.. ㅠ
+        하ㅏㅏ... 자괴감 
+        쩌네
+    </p>
+  <% if (showPopup) { %>
+    <div id="popup" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);">
+      <div style="position: relative; width: 300px; margin: 100px auto; padding: 20px; background: white; text-align: center;">
+        <hr color="lightpink">
+        <br>
+        <p>노베이스에 부트캠프 한번 뛰고 개발한다는 놈들은 괴물들인가??
+        </p>
+        <br>
+        <hr color="lightpink">
+        <label>
+          <input type="checkbox" id="rememberCheckbox"> 고마해라 마이 뭇다 아이가
+        </label>
+        <button id="closeBtn">닫기</button>
+      </div>
+    </div>
+  <% } %>
+
+  <script src="/main.js"></script>
+</body>
+</html>
