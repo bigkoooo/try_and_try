@@ -1,0 +1,7 @@
+@server=http://localhost:8080
+POST {[server]}/api/users
+Content-Type: application/json; charset-UTF-8
+{
+  "username" : "damon",
+  "email" : "test@test.com"
+}

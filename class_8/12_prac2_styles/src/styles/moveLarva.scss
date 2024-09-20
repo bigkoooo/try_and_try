@@ -1,0 +1,58 @@
+$color-red: rgb(235, 138, 138);
+$color-yellow: rgb(239, 213, 140);
+$color-blue: rgb(106, 156, 226);
+
+@mixin moveball($movedistance) {
+    animation: move-#{$movedistance} 3s infinite;
+    @keyframes move-#{$movedistance} {
+        0% {
+        top: 0;
+        left: 0;
+        }
+        25% {
+        top: 0;
+        left: #{$movedistance}px;
+        }
+        50% {
+        top: #{$movedistance}px;
+        left: #{$movedistance}px;
+        }
+        75% {
+        top: #{$movedistance}px;
+        left: 0;
+        }
+        100% {
+        top: 0;
+        left: 0;
+        }
+    }
+    }
+
+
+.container {
+
+    .ball {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .redball {
+        @extend .ball;
+        background-color: $color-red;
+        @include moveball(10);
+    }
+
+    .yellowball {
+        @extend .ball;
+        background-color: $color-yellow;
+        @include moveball(20);
+    }
+
+    .blueball {
+        @extend .ball;
+        background-color: $color-blue;
+        @include moveball(30);
+    }
+}
